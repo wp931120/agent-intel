@@ -1,6 +1,21 @@
 # Agent Intel 🤖
 
-**AI Agent 情报收集器** — 基于 AnySearch API 的 AI Agent 领域情报自动化采集工具。
+<p align="center">
+  <img src="assets/logo.svg" width="200" height="200" alt="Agent Intel Logo">
+</p>
+
+<p align="center">
+  <b>AI Agent 情报收集器</b><br>
+  基于 AnySearch API 的 AI Agent 领域情报自动化采集工具
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License MIT">
+  <img src="https://img.shields.io/badge/AnySearch-API-00d4ff" alt="AnySearch API">
+  <img src="https://img.shields.io/badge/OpenClaw-Skill-7c3aed" alt="OpenClaw Skill">
+</p>
+
+---
 
 通过一个 shell 脚本 + 一个 SKILL.md，系统化收集 AI Agent 领域的最新动态、技术文档、学术论文、开源代码和市场信息。
 
@@ -116,6 +131,11 @@ agent-intel/
 │   └── agent-search.sh         # AnySearch 搜索封装脚本
 ├── references/
 │   └── tags.md                 # AnySearch Tags 完整参考
+├── assets/
+│   └── logo.svg                # 项目 Logo
+├── CHANGELOG.md
+├── logs/
+│   └── README.md
 ├── README.md
 └── .gitignore
 ```
