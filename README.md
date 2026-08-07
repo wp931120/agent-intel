@@ -1,7 +1,7 @@
 # Agent Intel 🤖
 
 <p align="center">
-  <img src="assets/logo.svg" width="200" height="200" alt="Agent Intel Logo">
+  <img src="assets/logo.svg" width="600" height="300" alt="Agent Intel Logo">
 </p>
 
 <p align="center">
