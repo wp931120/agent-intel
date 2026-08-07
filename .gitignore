@@ -1,3 +1,5 @@
 .DS_Store
 *.skill
 __pycache__/
+logs/*.md
+!logs/README.md
