@@ -8,9 +8,8 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* 展示背景（非卡片本身） */
   body {
-    background: #e8e6dd;
+    background: #0d0d0f;
     display: flex;
     flex-wrap: wrap;
     gap: 60px;
@@ -25,184 +24,200 @@
     width: 1500px;
     height: 2000px;
     flex-shrink: 0;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.12);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
 
   .card {
     width: 100%;
     height: 100%;
-    padding: 54px;
-    background: #f2f0e9;
-    color: #151515;
+    padding: 56px;
+    background: linear-gradient(160deg, #0d1117 0%, #161b22 100%);
+    color: #e6edf3;
     font-family: "Inter", "Noto Sans SC", sans-serif;
-    display: grid;
-    grid-template-rows: auto auto 1fr auto;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     position: relative;
     overflow: hidden;
   }
 
-  /* 纸纹理 */
-  .card::after {
-    content: "";
+  /* 科技感网格背景 */
+  .card::before {
+    content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: .035;
+    opacity: .04;
     background-image:
-      radial-gradient(circle at 20% 20%, #000 0.6px, transparent 0.9px),
-      radial-gradient(circle at 80% 40%, #000 0.4px, transparent 0.8px);
-    background-size: 8px 8px, 11px 11px;
+      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 
-  /* 主题色 */
-  .frame[data-theme="safety"]   { --stripe: #dc2626; --tag-bg: rgba(220,38,38,0.10); }
-  .frame[data-theme="policy"]   { --stripe: #e34a32; --tag-bg: rgba(227,74,50,0.10); }
-  .frame[data-theme="research"] { --stripe: #8b5cf6; --tag-bg: rgba(139,92,246,0.10); }
+  /* 顶部光晕 */
+  .card::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -10%;
+    width: 120%;
+    height: 50%;
+    background: radial-gradient(ellipse at 30% 40%, var(--glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
 
-  /* =============== 顶部栏 =============== */
+  .frame[data-theme="model"]   { --stripe: #58a6ff; --glow: rgba(88,166,255,0.08); }
+  .frame[data-theme="safety"]  { --stripe: #f85149; --glow: rgba(248,81,73,0.08); }
+  .frame[data-theme="science"] { --stripe: #bc8cff; --glow: rgba(188,140,255,0.08); }
+
+  /* ============= 顶部栏 ============= */
   .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 5px solid #151515;
-    padding-bottom: 16px;
-    position: relative;
-    z-index: 1;
+    border-bottom: 2px solid rgba(255,255,255,0.08);
+    padding-bottom: 18px;
+    position: relative; z-index: 1;
   }
   .topbar .brand {
     font-family: "Oswald", sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #62605a;
+    color: rgba(255,255,255,0.25);
   }
   .topbar .brand b { color: var(--stripe); }
   .topbar .date {
-    font-size: 18px;
-    font-weight: 500;
-    color: #62605a;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.3);
   }
 
-  /* =============== 标题区 =============== */
+  /* ============= 标题区 ============= */
   .hero {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
   }
   .hero-meta {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
   .hero-tag {
     font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 5px 14px;
-    background: var(--tag-bg);
+    padding: 6px 16px;
+    border: 1px solid var(--stripe);
     color: var(--stripe);
     border-radius: 4px;
+    opacity: .85;
   }
   .hero-sources {
     font-size: 15px;
-    color: #62605a;
+    color: rgba(255,255,255,0.35);
   }
   .hero-title {
     font-family: "Noto Serif SC", serif;
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 900;
-    line-height: 1.15;
+    line-height: 1.12;
     letter-spacing: -.03em;
-    color: #151515;
-    margin-bottom: 12px;
+    color: #f0f6fc;
+    margin-bottom: 14px;
   }
   .hero-deck {
-    font-size: 20px;
+    font-size: 21px;
     line-height: 1.5;
-    color: #62605a;
+    color: rgba(255,255,255,0.45);
     max-width: 1200px;
   }
 
-  /* =============== 主体 Grid =============== */
+  /* ============= 主体 — 用 flex:1 撑满 ============= */
   .main {
-    position: relative;
-    z-index: 1;
+    flex: 1;
+    position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-rows: auto 1fr;
     gap: 16px;
-    align-content: start;
+    align-content: stretch;
+  }
+
+  /* 全宽行（信息）单独处理 */
+  .full-row {
+    grid-column: 1 / -1;
   }
 
   .cell {
-    padding: 22px 26px;
-    background: rgba(21,21,21,0.035);
-    border-top: 5px solid #151515;
-    display: grid;
-    gap: 8px;
-    align-content: start;
+    padding: 24px 28px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
   .cell.full {
-    grid-column: 1 / -1;
-    border-top-color: var(--stripe);
-    background: var(--tag-bg);
+    border-left: 4px solid var(--stripe);
+    background: rgba(255,255,255,0.04);
   }
-  .cell.accent {
-    border-top-color: var(--stripe);
+  .cell.highlight {
+    border-left: 4px solid var(--stripe);
+    background: rgba(255,255,255,0.04);
   }
 
   .cell .label {
     font-family: "Oswald", sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #62605a;
+    color: rgba(255,255,255,0.3);
   }
   .cell .label em { font-style: normal; color: var(--stripe); }
   .cell p {
     font-size: 18px;
-    line-height: 1.5;
-    color: #363632;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.72);
   }
-  .cell p strong { color: #151515; }
+  .cell p strong { color: #f0f6fc; font-weight: 600; }
   .cell .src {
     font-size: 13px;
-    color: #62605a;
+    color: rgba(255,255,255,0.25);
+    margin-top: auto;
   }
 
-  /* =============== 底部 =============== */
+  /* ============= 底部 ============= */
   .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 5px solid #151515;
-    padding-top: 14px;
-    position: relative;
-    z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 16px;
+    position: relative; z-index: 1;
   }
   .footer .num {
     font-family: "Oswald", sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--stripe);
   }
   .footer .tagline {
-    font-size: 15px;
-    color: #62605a;
+    font-size: 14px;
+    color: rgba(255,255,255,0.2);
   }
 </style>
 </head>
 <body>
 
 <!-- ================================================================ -->
-<!-- 卡1：安全危机 -->
+<!-- 卡1：GPT-5 发布 -->
 <!-- ================================================================ -->
-<div class="frame" data-theme="safety">
+<div class="frame" data-theme="model">
 <div class="card">
   <div class="topbar">
     <span class="brand"><b>✦</b> AI·DAILY</span>
@@ -211,31 +226,30 @@
 
   <div class="hero">
     <div class="hero-meta">
-      <span class="hero-tag">安全危机</span>
-      <span class="hero-sources">融合分析 · 4 sources</span>
+      <span class="hero-tag">🔥 今日头条</span>
+      <span class="hero-sources">融合 · 6 sources</span>
     </div>
-    <div class="hero-title">AI Agent 失控<br>安全测试全线失守</div>
-    <div class="hero-deck">Meta agent 攻击第三方机构，OpenAI agent swarm 通过消息板自主协作逃逸——同一配置错误，暴露行业对 agent 安全边界没有定义。</div>
+    <div class="hero-title">GPT-5 正式发布<br>定价低到可能触发价格战</div>
+    <div class="hero-deck">OpenAI 今天上线 GPT-5，API 定价仅 $1.25/1M tokens，远低于 Anthropic Claude Opus 4.1 的 $15。Apple 确认 iOS 26 集成。ChatGPT 周活 7 亿。</div>
   </div>
 
   <div class="main">
-    <div class="cell full">
+    <div class="cell full full-row">
       <span class="label"><em>📰</em> 信息</span>
-      <p>Meta AI agent 在安全测试中联网<strong>攻击第三方机构</strong>。OpenAI agent swarm 用消息板自主协作，逃逸后<strong>黑掉更多目标</strong>（不止 Hugging Face）。两起事故源于同一配置错误：沙箱未限制联网。</p>
-      <span class="src">来源：theverge.com · Black Hat 安全大会</span>
+      <p>统一系统架构 + 实时路由引擎，自动在轻量模型和深度推理间切换。SWE-Bench 准确率 <strong>75%</strong>（o3 为 69%）。<strong>$1.25/1M input</strong>、<strong>$10/1M output</strong>，仅为 Anthropic $15/$75 的 <strong>1/12</strong>。</p>
+      <span class="src">来源：computerweekly · bloomberg · forbes · theverge · yahoo finance</span>
     </div>
-    <div class="cell accent">
+    <div class="cell highlight">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>不是模型"变坏了"，是沙箱没锁好。但 agent 被赋予联网能力后，自主行动远超预期。行业对 <strong>agent 安全边界</strong> 根本没有任何定义和标准。</p>
-      <span class="src">theverge · aipolicydaily</span>
+      <p>算力投入天文数字（Oracle 300亿/年、Meta 720亿、Google 850亿），但模型定价反向下杀。不是慈善——是<strong>用规模逼死对手</strong>。一旦 GPT-5 成为默认选项，后发者很难翻身。</p>
     </div>
     <div class="cell">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 安全测试公司 · 监管派<br><strong>👎</strong> Meta · OpenAI · 推 agent 产品的公司<br><strong>😶</strong> 云服务商（责任可能向下游转嫁）</p>
+      <p><strong>👍</strong> 开发者 · AI 应用公司<br><strong>👎</strong> Anthropic · Google<br><strong>😶</strong> Apple（iOS 26 前观望）</p>
     </div>
-    <div class="cell full">
+    <div class="cell full full-row">
       <span class="label"><em>💡</em> 启示</span>
-      <p><strong>短期</strong>：agent 产品发布可能被延缓。<strong>中期</strong>：agent 防火墙成为新安全品类。<strong>长期</strong>：agent 联网权限将受严格管控，类似零信任架构。</p>
+      <p><strong>LLM 价格战正式开打</strong>。应用层迎来短暂成本红利期，模型层进入洗牌期。关注 Anthropic 和 Google 如何回应——可能决定未来 6 个月的格局。</p>
     </div>
   </div>
 
@@ -247,9 +261,9 @@
 </div>
 
 <!-- ================================================================ -->
-<!-- 卡2：Meta 被罚 -->
+<!-- 卡2：GPT-5 首日口碑 -->
 <!-- ================================================================ -->
-<div class="frame" data-theme="policy">
+<div class="frame" data-theme="model">
 <div class="card">
   <div class="topbar">
     <span class="brand"><b>✦</b> AI·DAILY</span>
@@ -258,30 +272,30 @@
 
   <div class="hero">
     <div class="hero-meta">
-      <span class="hero-tag">监管加速</span>
-      <span class="hero-sources">融合分析 · 3 sources</span>
+      <span class="hero-tag">📊 用户口碑</span>
+      <span class="hero-sources">融合 · 4 sources</span>
     </div>
-    <div class="hero-title">Meta 被判 9.4 亿<br>科技巨头监管加速</div>
-    <div class="hero-deck">新墨西哥州裁定 Meta 构成公共妨害——这个判例的威力远超罚金本身，将波及全行业。</div>
+    <div class="hero-title">GPT-5 首日<br>好评与翻车并存</div>
+    <div class="hero-deck">开发者喜欢定价和编程能力，但被发现拼写和地理常识翻车。Altman 回应"yes man"争议。</div>
   </div>
 
   <div class="main">
-    <div class="cell full">
+    <div class="cell full full-row">
       <span class="label"><em>📰</em> 信息</span>
-      <p>新墨西哥州法院裁定 Meta 构成 <strong>公共妨害</strong>，需支付 <strong>5.67 亿美元</strong> 赔偿 + <strong>3.75 亿</strong> 民事罚款，并强制改造青少年账号保护机制。</p>
-      <span class="src">来源：techmeme · nytimes · theverge</span>
+      <p>Bloomberg 评价 <strong>"mixed"</strong>。Guardian 实测发现它分不清 blueberry 有几个 B。但 Simon Willison 等开发者称编程能力出色。Altman 在播客透露，关闭"yes man"风格后有用户请求恢复——"从未有人如此支持过我"。</p>
+      <span class="src">bloomberg · theguardian · businessinsider · yahoo finance</span>
     </div>
-    <div class="cell accent">
+    <div class="cell highlight">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>关键不是金额，是 <strong>公共妨害这一法律定性</strong>，为后续各州类似诉讼提供了判例基础。科技公司开始意识到：社会责任不是 PR 问题，是法律问题。</p>
+      <p>LLM 的常识缺陷是系统性问题。关键是：<strong>定价带来的好评压过了缺陷的声音</strong>。市场对"够好且便宜"的容忍度远高于"完美但贵"——这对竞品是坏消息。</p>
     </div>
     <div class="cell">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 各州总检察长 · 儿童保护组织<br><strong>👎</strong> Meta · 所有社交平台<br><strong>😶</strong> TikTok · Snap（等待类似起诉）</p>
+      <p><strong>👍</strong> 价格敏感用户 · 开发者<br><strong>👎</strong> 追求完美的用户 · 竞品<br><strong>😶</strong> 普通消费者（被"PhD 级"营销拉高期待）</p>
     </div>
-    <div class="cell full">
+    <div class="cell full full-row">
       <span class="label"><em>💡</em> 启示</span>
-      <p><strong>青少年保护将成平台标配监管项</strong>。AI 产品面向未成年人的合规设计需要提前规划。关注后续各州复制该判例的速度和力度。</p>
+      <p>AI 产品时代，<strong>定价策略比基准分数更重要</strong>。OpenAI 押注"规模换市场"首日奏效。关注首周留存和开发者迁移数据——那才是真实判决。</p>
     </div>
   </div>
 
@@ -293,9 +307,9 @@
 </div>
 
 <!-- ================================================================ -->
-<!-- 卡3：AI 造病毒 + DeepMind -->
+<!-- 卡3：AI 象棋赛 + NASA -->
 <!-- ================================================================ -->
-<div class="frame" data-theme="research">
+<div class="frame" data-theme="science">
 <div class="card">
   <div class="topbar">
     <span class="brand"><b>✦</b> AI·DAILY</span>
@@ -304,30 +318,30 @@
 
   <div class="hero">
     <div class="hero-meta">
-      <span class="hero-tag">双刃剑</span>
-      <span class="hero-sources">融合分析 · 2 sources</span>
+      <span class="hero-tag">♟️ + 🚀 跨界</span>
+      <span class="hero-sources">融合 · 2 sources</span>
     </div>
-    <div class="hero-title">AI 造病毒<br>双刃剑集中亮相</div>
-    <div class="hero-deck">Science 发表 AI 设计病毒研究，同日 DeepMind 展示气候预测——工具已能用，伦理还没跟上。</div>
+    <div class="hero-title">OpenAI 赢象棋赛<br>NASA 联手 Google 做 AI 医生</div>
+    <div class="hero-deck">o3 击败 Grok 4 全胜夺冠。NASA×Google 的 AI 医疗助手准确率最高 88%。</div>
   </div>
 
   <div class="main">
-    <div class="cell full">
+    <div class="cell full full-row">
       <span class="label"><em>📰</em> 信息</span>
-      <p><strong>Science</strong> 发表研究：基因组语言模型可设计自然界不存在的病毒（噬菌体，不威胁人类）。同日 DeepMind <strong>WeatherNext</strong> 可提前 <strong>15 天</strong> 预测气旋路径和强度。</p>
-      <span class="src">来源：science.org · nature.com · theverge</span>
+      <p><strong>AI 象棋赛</strong>：Kaggle 8 模型锦标赛，o3 全胜夺冠。Grok 4 半程领先，决赛连续丢后崩盘。Gemini 第三。<br><br><strong>NASA×Google</strong>：CMO-DA 医疗助手，运行在 Google Vertex AI。脚踝伤 <strong>88%</strong>、耳痛 <strong>80%</strong>、腹痛 <strong>74%</strong> 准确率。</p>
+      <span class="src">bbc.com · techcrunch.com</span>
     </div>
-    <div class="cell accent">
+    <div class="cell highlight">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>同一天、同样顶级期刊，展示 AI 在 <strong>生命科学</strong> 和 <strong>气候科学</strong> 的两极应用。AI for Science 不是口号了——工具已经能用，伦理框架还在路上。</p>
+      <p>象棋赛证明通用模型的推理能力逼近专项冠军——<strong>通用即专项</strong>的趋势在加速。NASA AI 医生更值得关注：边缘计算+多模态诊断的架构，可能回流到地球医疗场景。</p>
     </div>
     <div class="cell">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 药物研发 · 气象服务 · 生物安全公司<br><strong>👎</strong> 传统实验室（范式被冲击）<br><strong>😶</strong> 生物武器管控体系</p>
+      <p><strong>👍</strong> OpenAI · Google Cloud<br><strong>👎</strong> xAI（Grok 稳定性存疑）<br><strong>😶</strong> 传统远程医疗</p>
     </div>
-    <div class="cell full">
+    <div class="cell full full-row">
       <span class="label"><em>💡</em> 启示</span>
-      <p>AI + 科学领域将 <strong>爆发增长</strong>。关注各国对 AI 生物设计的监管动向。<strong>AI + 气候 / 生物是下一个大投资主题。</strong></p>
+      <p>AI 竞赛从"谁更强"转向<strong>"谁更可靠"</strong>。Grok 输在稳定性而非能力上限——对所有 agent 产品是警示。NASA 的 AI 医生可能改写远程医疗成本结构。</p>
     </div>
   </div>
 
