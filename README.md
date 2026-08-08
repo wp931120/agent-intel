@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>基于 AnySearch API 的每日 AI 动态采集与 HTML 简报生成工具</b><br>
-  检索 → 四维分析（信息·洞察·利益·启示）→ 3:4 HTML 卡片
+  检索 → 四维分析（信息/洞察/利益/启示）→ 3:4 HTML 卡片
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 
 ---
 
-每日 AI 简报生成器。每天早上跑一轮，产出可传播的 HTML 信息卡片。
+每日 AI 简报生成器。搜到信息后按四维拆解，输出可传播的 3:4 HTML 卡片。支持单事件和融合分析两种模式。
 
 ## 工作流
 
@@ -49,20 +49,22 @@ bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
 
 ### Step 4 — 四维分析
 
-每条信息按四个维度拆解：
-
 | 维度 | 问什么 |
 |------|--------|
-| 📰 信息 | 发生了什么？谁说的？关键数据？ |
+| 📰 信息 | 发生了什么？谁说的？关键数字？ |
 | 🔍 洞察 | 话里有话？反映什么趋势？ |
 | ⚖️ 利益 | 谁受益？谁承压？谁观望？ |
-| 💡 启示 | 接下来怎样？对我意味着什么？ |
+| 💡 启示 | 然后呢？对我意味着什么？ |
+
+**两种模式：**
+- **单事件** — 一条消息独立出卡
+- **融合分析** — 多来源合并到一张卡，每项标注来源
 
 ### Step 5 — 生成 HTML 卡片
 
-每条分析生成一张 3:4 竖版 HTML 卡片。样式参考 `references/analysis-card-template.html`。
+3:4 竖版，主次布局（35% 主区 + 65% 次区）。参考模板：[analysis-card-template.html](references/analysis-card-template.html)
 
-一个选题可生成多张卡片（主卡+副卡），最终输出完整 HTML 简报页。
+**主题色系统：** 蓝（模型）/ 红（政策）/ 橙（融资）/ 紫（论文）/ 青（行业整合）
 
 ## 快速开始
 
@@ -74,10 +76,10 @@ cd agent-intel
 # 2. 设置 API Key
 export ANYSEARCH_API_KEY="as_sk_xxxxxx"
 
-# 3. 检索（JSON 模式方便分析）
+# 3. 检索
 bash scripts/agent-search.sh "Claude Sonnet 4 features" 10 en general.general json
 
-# 4. 查看卡片模板参考
+# 4. 查看卡片模板
 open references/analysis-card-template.html
 ```
 

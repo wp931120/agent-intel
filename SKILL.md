@@ -1,11 +1,11 @@
 ---
 name: agent-intel
-description: 每日 AI 简报生成器。使用 AnySearch API 检索 AI 领域最新动态，通过四维分析（信息·洞察·利益·启示）输出 3:4 竖版 HTML 信息卡片。适合每日早报、行业快讯、投研分析等场景。支持 Skill/MCP/API 三种接入方式。
+description: 每日 AI 简报生成器。使用 AnySearch API 检索 AI 领域最新动态，通过四维分析（信息·洞察·利益·启示）输出 3:4 竖版 HTML 信息卡片。支持单事件/多源融合分析，主次布局设计。适合每日早报、行业快讯、投研分析等场景。支持 Skill/MCP/API 三种接入方式。
 ---
 
 # 🦞 每日 AI 简报生成器
 
-基于 [AnySearch API](https://www.anysearch.com) 的每日 AI 动态采集与分析工具。每天早上跑一轮，产出可传播的 HTML 信息卡片。
+基于 [AnySearch API](https://www.anysearch.com) 的每日 AI 动态采集与深度分析工具。搜到信息后按四维拆解，输出可传播的 HTML 卡片。
 
 ## 工作流
 
@@ -17,10 +17,10 @@ description: 每日 AI 简报生成器。使用 AnySearch API 检索 AI 领域�
 
 ## Step 1 — 选题
 
-每日自动扫描 AI 领域热点，或由用户指定主题。典型选题方向：
+每日自动扫描 AI 领域热点，或由用户指定。典型方向：
 
-- 大模型发布/更新（GPT、Claude、Llama、Gemini 等）
-- AI 框架/工具新版本（LangChain、CrewAI、AutoGPT 等）
+- 模型发布/更新（GPT、Claude、Llama、Gemini 等）
+- AI 框架/工具新版本
 - 融资与公司动态
 - 论文突破
 - 政策与监管变动
@@ -36,10 +36,10 @@ description: 每日 AI 简报生成器。使用 AnySearch API 检索 AI 领域�
 ## Step 3 — 检索
 
 ```bash
-# JSON 模式 — 输出原始 JSON 供分析
+# JSON 模式（供分析）
 bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag] json
 
-# 普通模式 — 直接看结果
+# 可读模式
 bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
 ```
 
@@ -47,73 +47,57 @@ bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
 
 对每条信息按四个维度拆解：
 
-### 📰 信息
-**事实层面：谁、什么、何时、何地、多少**
-- 发生了什么？信源是谁？
-- 关键数据/数字是什么？
-- 替代了之前的什么认知？
+| 维度 | 问什么 |
+|------|--------|
+| 📰 **信息** | 发生了什么？谁说的？关键数字？ |
+| 🔍 **洞察** | 话里有话？反映什么趋势？ |
+| ⚖️ **利益** | 谁受益？谁承压？谁观望？ |
+| 💡 **启示** | 然后呢？对我意味着什么？ |
 
-### 🔍 洞察
-**信号层面：话里有话、趋势判断**
-- 措辞背后是什么意图？
-- 这反映了什么趋势？
-- 跟近期其他事件有什么关系？
+### 两种分析模式
 
-### ⚖️ 利益
-**格局层面：谁受益、谁承压**
-- 直接受益方/受损方是谁？
-- 产业链上下游谁被波及？
-- 谁在沉默、谁在观望？
+**单事件模式** — 一条消息独立出卡。来源单一，事实清晰。
 
-### 💡 启示
-**行动层面：然后呢、对我意味着什么**
-- 接下来会发生什么？
-- 短期（1-3月）/中期（半年-1年）影响
-- 我需要关注什么信号？
+**融合分析模式** — 同一主题的多个消息合并到一张卡。来源在每项底部标注，适用于：
+- 一个事件被多家报道（如 GPT-5 发布会 × TechCrunch + The Verge）
+- 多个事件指向同一趋势（如 Cursor 融资 + Devin 融资 = AI 编程赛道升温）
 
 ## Step 5 — 生成 HTML 卡片
 
-每条分析输出一张 3:4 竖版 HTML 卡片（参考 `references/analysis-card-template.html`）。
+参考模板：[analysis-card-template.html](references/analysis-card-template.html)
 
-### 卡片模板
+### 卡片结构
 
-```html
-<!-- 每张卡片尺寸：3:4 比例，1080×1440px -->
-<div class="card">
-  <div class="card-header">
-    <span class="card-tag">简报类型</span>
-  </div>
-  <div class="card-section">
-    <h3>📰 信息</h3>
-    <p>事实层内容...</p>
-  </div>
-  <div class="card-section">
-    <h3>🔍 洞察</h3>
-    <p>信号层分析...</p>
-  </div>
-  <div class="card-section">
-    <h3>⚖️ 利益</h3>
-    <p>格局层判断...</p>
-  </div>
-  <div class="card-section">
-    <h3>💡 启示</h3>
-    <p>行动层建议...</p>
-  </div>
-  <div class="card-footer">
-    <span>🦞 每日 AI 简报 · YYYY-MM-DD</span>
-    <span class="card-source">来源</span>
-  </div>
-</div>
+```
+┌─────────────────────────┐
+│  🦞 每日 AI 简报           │
+│  ✦ 分类标签 · N sources   │
+│                           │
+│  ┌── 主区 35% ──────────┐ │
+│  │  背景光晕 + 大编号     │ │
+│  │  标题（粗体，大字）     │ │
+│  │  一句话摘要（灰度）     │ │
+│  └───────────────────────┘ │
+│                           │
+│  ┌── 次区 65% ──────────┐ │
+│  │  📰 信息              │ │
+│  │  🔍 洞察（+ 来源）     │ │
+│  │  ⚖️ 利益              │ │
+│  │  💡 启示              │ │
+│  └───────────────────────┘ │
+│  🦞 每日 AI 简报 · 日期   │
+└─────────────────────────┘
 ```
 
-### 多卡片简报
+### 主题色系统
 
-一个选题可能生成多张卡片：
-
-- **主卡**：该选题的核心事件
-- **副卡**：相关延展（如技术细节、竞品反应、历史对比）
-
-最终生成一份完整的 HTML 简报页面，包含所有卡片。
+| 类型 | 色值 | 标签 |
+|------|------|------|
+| 模型发布 | `#5b9aff` 蓝 | model |
+| 政策监管 | `#ff6b6b` 红 | policy |
+| 融资动态 | `#ffb347` 橙 | funding |
+| 论文突破 | `#c084fc` 紫 | research |
+| 行业整合 | `#4dd0e1` 青 | merger |
 
 ---
 
@@ -150,6 +134,8 @@ bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
 
 卡片 HTML 结构参考：[analysis-card-template.html](references/analysis-card-template.html)
 
+模板包含 4 张示例卡片：2 张融合分析 + 2 张单事件。
+
 ## API 参考
 
 参数详情和响应结构见 [AnySearch 官方文档](https://www.anysearch.com/docs)。
@@ -166,8 +152,11 @@ bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
 # 1. 设置 API Key
 export ANYSEARCH_API_KEY="as_sk_xxxxxx"
 
-# 2. 检索
+# 2. 检索（JSON 模式）
 bash scripts/agent-search.sh "Claude Sonnet 4 features" 10 en general.general json
 
-# 3. 免费注册获取 API Key：https://www.anysearch.com
+# 3. 查看卡片模板
+open references/analysis-card-template.html
+
+# 4. 免费注册获取 API Key：https://www.anysearch.com
 ```
