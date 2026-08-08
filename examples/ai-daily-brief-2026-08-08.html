@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦞 每日 Agent 简报 · 2026.08.08</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Oswald:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d0d0f;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    padding: 60px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .frame { width: 1500px; height: 2000px; flex-shrink: 0; box-shadow: 0 24px 80px rgba(0,0,0,0.5); }
+  .card { width:100%; height:100%; padding:50px; background:linear-gradient(160deg,#0b0f15 0%,#141922 100%); color:#e6edf3; font-family:"Inter","Noto Sans SC",sans-serif; display:flex; flex-direction:column; gap:20px; position:relative; overflow:hidden; }
+  .card::before { content:''; position:absolute; inset:0; pointer-events:none; opacity:.035; background-image:linear-gradient(rgba(255,255,255,.05)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05)1px,transparent 1px); background-size:32px 32px; }
+  .watermark { position:absolute; right:30px; bottom:80px; opacity:.025; pointer-events:none; z-index:0; }
+
+  .frame[data-theme="model"]    { --stripe:#58a6ff; }
+  .frame[data-theme="opensource"]{ --stripe:#3fb950; }
+  .frame[data-theme="paper"]    { --stripe:#bc8cff; }
+
+  .accent-bar { position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--stripe)0%,transparent 80%); z-index:2; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.06); position:relative; z-index:1; }
+  .topbar .brand { font-family:"Oswald",sans-serif; font-size:20px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+  .topbar .brand b { color:var(--stripe); }
+  .topbar .date { font-size:15px; font-weight:400; color:rgba(255,255,255,0.25); }
+
+  .hero { position:relative; z-index:1; display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; }
+  .hero-left { min-width:0; }
+  .hero-right { align-self:center; opacity:.6; }
+  .hero-meta { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .hero-tag { font-family:"Oswald",sans-serif; font-size:12px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; padding:5px 14px; border:1px solid var(--stripe); color:var(--stripe); border-radius:3px; }
+  .hero-sources { font-size:14px; color:rgba(255,255,255,0.3); }
+  .hero-title { font-family:"Noto Serif SC",serif; font-size:56px; font-weight:900; line-height:1.1; letter-spacing:-.03em; color:#f0f6fc; margin-bottom:10px; }
+  .hero-deck { font-size:19px; line-height:1.5; color:rgba(255,255,255,0.4); max-width:1100px; }
+
+  .main { flex:1; position:relative; z-index:1; display:grid; grid-template-columns:1.25fr 0.75fr; grid-template-rows:auto 1fr; gap:14px; }
+  .full-row { grid-column:1/-1; }
+  .cell { padding:20px 24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px; display:flex; flex-direction:column; gap:8px; }
+  .cell.highlight { border-left:3px solid var(--stripe); background:rgba(255,255,255,0.03); }
+  .cell .label { font-family:"Oswald",sans-serif; font-size:14px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.25); }
+  .cell .label em { font-style:normal; color:var(--stripe); }
+  .cell p { font-size:17px; line-height:1.55; color:rgba(255,255,255,0.7); }
+  .cell p strong { color:#f0f6fc; font-weight:600; }
+  .cell .src { font-size:12px; color:rgba(255,255,255,0.2); margin-top:auto; }
+
+  .footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06); padding-top:14px; position:relative; z-index:1; }
+  .footer .num { font-family:"Oswald",sans-serif; font-size:18px; font-weight:700; color:var(--stripe); }
+  .footer .tagline { font-size:13px; color:rgba(255,255,255,0.18); }
+</style>
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!-- 卡1：⭐ 模型更新 — GPT-5.6 Sol/Luna -->
+<!-- ================================================================ -->
+<div class="frame" data-theme="model">
+<div class="card">
+  <div class="accent-bar"></div>
+  <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
+    <circle cx="80" cy="80" r="75" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="80" cy="80" r="40" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+    <path d="M80 5 L83 40 L80 45 L77 40 Z" fill="currentColor" opacity="0.2"/>
+  </svg>
+  <div class="topbar">
+    <span class="brand"><b>✦</b> AGENT·DAILY</span>
+    <span class="date">2026.08.08</span>
+  </div>
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-meta">
+        <span class="hero-tag">⭐ 模型更新</span>
+        <span class="hero-sources">2026.08.07 发布 · linkedin · openai</span>
+      </div>
+      <div class="hero-title">GPT-5.6 Sol/Luna<br>Instant 与推理全面合并</div>
+      <div class="hero-deck">OpenAI 8月7日将 GPT-5.6 Sol 作为 Plus/Pro 默认模型发布，Free 用户获得 Luna 无限对话。统一 Instant 和推理体验，并基于首日反馈紧急改进。</div>
+    </div>
+    <div class="hero-right">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <rect x="10" y="10" width="80" height="80" rx="12" stroke="#58a6ff" stroke-width="1.5" fill="none" opacity="0.3"/>
+        <path d="M35 50 L50 35 L65 50" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <path d="M50 35 L50 70" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="cell highlight full-row">
+      <span class="label"><em>📰</em> 关键事实</span>
+      <p><strong>8月7日</strong> OpenAI 发布重大更新：<strong>GPT-5.6 Sol</strong> 成为 Plus/Pro 用户默认模型，将此前分裂的 Instant 模式（快速响应）和推理模式（深度思考）<strong>彻底合并</strong>。Free 和 Go 用户则获得 <strong>GPT-5.6 Luna</strong>——无限对话次数，作为日常聊天的默认模型。<br><br>
+      OpenAI 在发布日志中表示这是 "one of the biggest ChatGPT updates we've ever shipped"，并且已经在 <strong>紧急处理首日用户反馈</strong>（收到 200+ 社区讨论和反馈）。Safety Hub 同步更新了 GPT-5.6 的 August 部署安全报告。</p>
+      <span class="src">OpenAI 官方更新日志 · OpenAI Safety Hub · LinkedIn 开发者社区</span>
+    </div>
+    <div class="cell highlight">
+      <span class="label"><em>🔍</em> Agent 开发者关注点</span>
+      <p><strong>1. Instant + 推理统一的意义</strong><br>
+      此前 Agent 开发者的一个核心痛点是在快速响应的 GPT-4o 和深度推理的 o3 之间手动切换。GPT-5.6 Sol 内置路由自动判断——这对 agent 框架的模型选择层影响深远。<br><br>
+      <strong>2. Luna 免费无限</strong><br>
+      Free 用户获得 unlimited chats with Luna，意味着 OpenAI 的用户获取漏斗从"免费试用→付费"变成了"永久免费基础层→付费增值层"。这对面向 C 端的 agent 产品是竞争压力。<br><br>
+      <strong>3. 快速迭代节奏</strong><br>
+      首日就在根据反馈做改进——说明 OpenAI 已经建立了非常强大的用户反馈回路。Agent 开发者应该关注 API 层面的对应更新。</p>
+    </div>
+    <div class="cell">
+      <span class="label"><em>⚖️</em> 技术栈影响</span>
+      <p><strong>👍 受益</strong><br>
+      · 使用 GPT-5 API 的 agent 应用<br>
+      · 依赖统一推理+响应能力的场景<br><br>
+      <strong>👎 承压</strong><br>
+      · 靠多模型路由的 agent 框架<br>
+      · 免费 agent 产品的商业模式<br><br>
+      <strong>🤔 关注</strong><br>
+      · API 端是否同步 Sol 能力<br>
+      · function calling 表现</p>
+    </div>
+    <div class="cell highlight full-row">
+      <span class="label"><em>💡</em> 行动建议</span>
+      <p><strong>这周：</strong>确认你的 API 账户是否自动升级到 GPT-5.6 系列。对比新模型在 agent 工作流中的响应速度和推理质量的平衡。<br><br>
+      <strong>关键测试：</strong>跑一轮原来的"快速响应"场景和"深度推理"场景，看 Sol 的统一路由是否能自动正确选择——如果没问题，agent 代码中的手动路由可以简化。<br><br>
+      <strong>关注：</strong>OpenAI Safety Hub 的完整基准数据发布，了解 Sol 在 tool-use 和 code gen 上的具体表现。</p>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="num">01 · ⭐ 模型更新</span>
+    <span class="tagline">🦞 面向 AI Agent 从业者</span>
+  </div>
+</div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 卡2：⭐ 开源项目 — 清华 VeriLoop Coder-E1 -->
+<!-- ================================================================ -->
+<div class="frame" data-theme="opensource">
+<div class="card">
+  <div class="accent-bar"></div>
+  <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
+    <path d="M80 20 L140 80 L80 140 L20 80 Z" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
+    <circle cx="80" cy="80" r="10" fill="currentColor" opacity="0.15"/>
+  </svg>
+  <div class="topbar">
+    <span class="brand"><b>✦</b> AGENT·DAILY</span>
+    <span class="date">2026.08.08</span>
+  </div>
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-meta">
+        <span class="hero-tag">⭐ 开源项目</span>
+        <span class="hero-sources">清华深研院 · 2026.08 发布</span>
+      </div>
+      <div class="hero-title">VeriLoop Coder-E1<br>开源模型 SWE-bench 85.2%</div>
+      <div class="hero-deck">清华团队基于 Qwen3.6-27B 训练的开源代码模型。SWE-bench Verified 85.2%，32B 以下开源模型排名第一。独创"循证螺旋"迭代架构。</div>
+    </div>
+    <div class="hero-right">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <path d="M50 10 L90 50 L50 90 L10 50 Z" stroke="#3fb950" stroke-width="1.2" fill="none" opacity="0.3"/>
+        <circle cx="50" cy="50" r="8" stroke="#3fb950" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M50 30 L50 70 M30 50 L70 50" stroke="#3fb950" stroke-width="1" opacity="0.3"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="cell highlight full-row">
+      <span class="label"><em>📰</em> 项目速览</span>
+      <p><strong>VeriLoop Coder-E1</strong> — 清华大学深圳国际研究生院研发，基于 <strong>Qwen3.6-27B</strong> 构建，面向仓库级代码修复与 Agent 式软件工程任务的开源垂类代码模型。Apache 2.0 协议开源。<br><br>
+      <strong>Benchmark 成绩（32B 以下开源模型第一）：</strong><br>
+      · SWE-bench Verified <strong>85.20%</strong> · SWE-bench Pro <strong>62.38%</strong><br>
+      · Terminal-Bench 2.0 <strong>76.40%</strong> · DeepSWE <strong>33.63%</strong><br><br>
+      <strong>核心创新：</strong>循证螺旋（Evidence-Governed Spiral）架构——六阶段循环：<strong>证→伪→探→修→验→化</strong>。每一轮生成由上一轮的证据约束和推动，不是机械重试。</p>
+      <span class="src">清华深研院 · 机器之心 · SWE-bench 排行榜</span>
+    </div>
+    <div class="cell highlight">
+      <span class="label"><em>🔍</em> Agent 开发者关注点</span>
+      <p><strong>1. "循证螺旋"对 Agent 架构的启发</strong><br>
+      这套"证→伪→探→修→验→化"的循环逻辑，本质上是给 LLM agent 的推理加了一层<strong>证据门控</strong>。它要求每一轮输出必须有可反证的证据支持，且证据必须<strong>能改变系统当前的判断</strong>——这和当前大多数 agent 框架的"堆 prompt"做法有本质不同。<br><br>
+      <strong>2. 开源但保留运行时</strong><br>
+      模型权重和 PEFT 适配器已开源，但 Self-Harness（运行时控制平面）暂不开放。这意味着想复现"循证螺旋"效果的开发者需要自己实现类似的推理循环控制逻辑。<br><br>
+      <strong>3. 对自建代码 agent 的意义</strong><br>
+      85.2% 的 SWE-bench 意味着开源方案在仓库级代码修复上已经接近闭源顶级模型。如果你在构建代码 agent，这个模型值得作为后端评估。</p>
+    </div>
+    <div class="cell">
+      <span class="label"><em>⚖️</em> 实用性评估</span>
+      <p><strong>👍 直接可用</strong><br>
+      · 模型权重已开源<br>
+      · 基于 Qwen 社区生态<br>
+      · 仓库级代码修复场景<br><br>
+      <strong>👎 局限</strong><br>
+      · Self-Harness 未开源<br>
+      · 需自行实现推理循环<br>
+      · 27B 需一定推理资源<br><br>
+      <strong>建议：高优先级试用</strong></p>
+    </div>
+    <div class="cell highlight full-row">
+      <span class="label"><em>💡</em> 行动建议</span>
+      <p><strong>这周：</strong>从 Hugging Face 下载 VeriLoop Coder-E1 权重，用你的代码 agent 用例跑一轮 SWE-bench 风格的验证。重点关注它在<strong>工具契约遵循和证据绑定</strong>上的表现。<br><br>
+      <strong>思考：</strong>能不能把"循证螺旋"的思路以更轻量的方式引入你现有的 agent 框架？比如加一层"证据验证中间件"，在 LLM 输出关键结果前先执行反证检查。<br><br>
+      <strong>关注：</strong>社区是否有人开源了 Self-Harness 的简化复现版本。</p>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="num">02 · ⭐ 开源项目</span>
+    <span class="tagline">🦞 面向 AI Agent 从业者</span>
+  </div>
+</div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 卡3：⭐ 开源/论文 — 面壁 ForgeStencil -->
+<!-- ================================================================ -->
+<div class="frame" data-theme="paper">
+<div class="card">
+  <div class="accent-bar"></div>
+  <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
+    <rect x="20" y="20" width="120" height="120" rx="4" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
+    <circle cx="30" cy="30" r="6" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+  </svg>
+  <div class="topbar">
+    <span class="brand"><b>✦</b> AGENT·DAILY</span>
+    <span class="date">2026.08.08</span>
+  </div>
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-meta">
+        <span class="hero-tag">⭐ 开源项目</span>
+        <span class="hero-sources">面壁智能 · OpenBMB · 2026.08.04</span>
+      </div>
+      <div class="hero-title">ForgeStencil<br>双 Agent 自动优化工业软件</div>
+      <div class="hero-deck">面壁智能开源全球首个 Stencil 自动优化系统。一周完成100+工业软件优化，研发效率提升100倍。Kernel Agent + App Agent 协同工作。</div>
+    </div>
+    <div class="hero-right">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <circle cx="35" cy="50" r="20" stroke="#bc8cff" stroke-width="1.2" fill="none" opacity="0.4"/>
+        <circle cx="65" cy="50" r="20" stroke="#bc8cff" stroke-width="1.2" fill="none" opacity="0.3"/>
+        <text x="35" y="56" text-anchor="middle" fill="#bc8cff" font-size="20" opacity="0.5" font-family="Inter" font-weight="600">K</text>
+        <text x="65" y="56" text-anchor="middle" fill="#bc8cff" font-size="20" opacity="0.4" font-family="Inter" font-weight="600">A</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="cell highlight full-row">
+      <span class="label"><em>📰</em> 项目速览</span>
+      <p><strong>ForgeStencil</strong> — 面壁智能联合 OpenBMB 开源，全球首个支持 Stencil（模板计算）自动研究与自动部署的 <strong>AI 优化系统</strong>。GitHub: OpenBMB/ForgeStencil<br><br>
+      <strong>架构设计：两个 Agent 协同</strong><br>
+      · <strong>Kernel Agent</strong> — 负责理论方向：自主研究并合成高性能 Kernel，构建专用算子矩阵<br>
+      · <strong>App Agent</strong> — 负责工程落地：定位热点函数、建立 GPU 基线、锻造候选优化、验证+集成<br><br>
+      <strong>效果：</strong>一周完成 100+ 真实工业软件自动优化。核反应堆 Minisweep 加速 <strong>5.78x</strong>、油藏 Hypre 加速 <strong>3.86x</strong>、MRI 重建加速 <strong>2.45x</strong>。效率相当于每年 4-8 名 HPC 专家的产出。</p>
+      <span class="src">面壁智能 · 智东西 · OpenBMB GitHub</span>
+    </div>
+    <div class="cell highlight">
+      <span class="label"><em>🔍</em> 对 Agent 开发的启示</span>
+      <p><strong>1. Agent 协同工作的优秀案例</strong><br>
+      Kernel Agent + App Agent 的分工非常清晰：一个做理论探索（算子优化），一个做工程落地（集成验证）。两个 Agent 共享知识库，经验可以累积复用——这是 <strong>多 Agent 系统在生产环境中的真实落地</strong>，不是炫 demo。<br><br>
+      <strong>2. "Agent 制造 Agent"</strong><br>
+      这是面壁智能继 5 月 ForgeTrain（AI 训练 AI）之后的又一成果，他们称之为 "Forge Engineering"——用 AI 系统来自动化 AI 系统的研发。这个方向值得关注。<br><br>
+      <strong>3. 从代码生成到自动研究</strong><br>
+      传统代码生成 agent 只做"写代码"，ForgeStencil 做到了"研究优化方案→写代码→验证→集成"的全自动闭环。这是 agent 能力边界扩展的一个方向。</p>
+    </div>
+    <div class="cell">
+      <span class="label"><em>⚖️</em> 实用判断</span>
+      <p><strong>👍 高价值参考</strong><br>
+      · 多 Agent 协同架构设计<br>
+      · 知识库共享机制<br>
+      · 从生成到验证的闭环<br><br>
+      <strong>👎 场景有限</strong><br>
+      · 针对 Stencil 计算的垂直场景<br>
+      · 需要 HPC 领域知识来复用架构<br><br>
+      <strong>建议：中等优先级学习</strong></p>
+    </div>
+    <div class="cell highlight full-row">
+      <span class="label"><em>💡</em> 可以借鉴什么</span>
+      <p><strong>架构层面：</strong>Kernel Agent 做研究 + App Agent 做落地的双角色设计值得借鉴。如果你的 agent 系统有"理论探索"和"工程验证"两个阶段，可以考虑拆成两个 agent 协同。<br><br>
+      <strong>知识共享层面：</strong>ForgeStencil 的 Agent 共享知识库让经验跨任务累积。思考你的 agent 系统是否有类似的"经验沉淀"机制，还是每次任务从零开始？<br><br>
+      <strong>关注：</strong>ForgeStencil 的 Agent 架构设计文档是否开源——对构建多 Agent 系统的开发者有很好的参考价值。</p>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="num">03 · ⭐ 开源项目</span>
+    <span class="tagline">🦞 面向 AI Agent 从业者</span>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
