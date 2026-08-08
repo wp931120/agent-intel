@@ -1,12 +1,14 @@
 #!/bin/bash
-# Agent Intel — AI Agent 情报搜索工具
-# Usage: bash agent-search.sh "<query>" [max_results] [language] [tag]
+# Agent Intel — AI 知识搜索工具
+# Usage: bash agent-search.sh "<query>" [max_results] [language] [tag] [mode]
+#
+# Modes:
+#   normal   — 格式化展示（默认）
+#   json     — 仅输出原始 JSON（供 Agent 程序化处理）
 #
 # Examples:
-#   bash agent-search.sh "AI Agent latest news"
-#   bash agent-search.sh "AI Agent" 15
-#   bash agent-search.sh "AI Agent" 10 zh-CN
-#   bash agent-search.sh "AI Agent" 10 en code.doc
+#   bash agent-search.sh "RAG 知识库构建" 10 zh-CN
+#   bash agent-search.sh "multi-agent system" 15 en general.general json
 
 set -euo pipefail
 
@@ -15,10 +17,11 @@ ANYSEARCH_API_KEY="${ANYSEARCH_API_KEY:-}"
 API_BASE="https://api.anysearch.com/v1/search"
 
 # Args
-QUERY="${1:?"Usage: $0 <query> [max_results] [language] [tag]"}"
+QUERY="${1:?"Usage: $0 <query> [max_results] [language] [tag] [mode]"}"
 MAX_RESULTS="${2:-10}"
 LANGUAGE="${3:-en}"
 TAG="${4:-general.general}"
+MODE="${5:-normal}"
 
 # Validate max_results
 if [[ ! "$MAX_RESULTS" =~ ^[0-9]+$ ]] || [ "$MAX_RESULTS" -lt 1 ] || [ "$MAX_RESULTS" -gt 20 ]; then
@@ -54,14 +57,25 @@ if [ -n "$ANYSEARCH_API_KEY" ]; then
 fi
 
 # Execute
-echo "🔍 Agent Intel — Searching: $QUERY" >&2
-echo "   Tag: $TAG | Max: $MAX_RESULTS | Lang: $LANGUAGE" >&2
-echo "---" >&2
+if [ "$MODE" = "json" ]; then
+  # JSON mode: output raw response to stdout, progress to stderr
+  echo "🔍 Agent Intel — Searching: $QUERY" >&2
+  echo "   Tag: $TAG | Max: $MAX_RESULTS | Lang: $LANGUAGE | Mode: json" >&2
 
-curl -s -X POST "$API_BASE" \
-  -H "Content-Type: application/json" \
-  "${AUTH_ARGS[@]}" \
-  -d "$JSON_PAYLOAD" | python3 -c "
+  curl -s -X POST "$API_BASE" \
+    -H "Content-Type: application/json" \
+    "${AUTH_ARGS[@]}" \
+    -d "$JSON_PAYLOAD"
+else
+  # Normal mode: formatted output
+  echo "🔍 Agent Intel — Searching: $QUERY" >&2
+  echo "   Tag: $TAG | Max: $MAX_RESULTS | Lang: $LANGUAGE" >&2
+  echo "---" >&2
+
+  curl -s -X POST "$API_BASE" \
+    -H "Content-Type: application/json" \
+    "${AUTH_ARGS[@]}" \
+    -d "$JSON_PAYLOAD" | python3 -c "
 import sys, json
 
 try:
@@ -94,7 +108,8 @@ for i, r in enumerate(results, 1):
         print(f'   {snippet}')
     print()
 
-# Output JSON for programmatic use
+# Output JSON appended with separator
 print('---JSON_OUTPUT---')
 print(json.dumps(data, ensure_ascii=False, indent=2))
 "
+fi

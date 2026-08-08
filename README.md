@@ -1,12 +1,12 @@
-# 🦞 Agent Intel — AI 知识收集工作流
+# 🦞 Agent Intel — 知识收集 + 深度分析
 
 <p align="center">
   <img src="assets/logo.svg" width="600" height="225" alt="Agent Intel Logo">
 </p>
 
 <p align="center">
-  <b>基于 AnySearch API 的 AI 知识收集自动化管线</b><br>
-  输入主题 → 拆解检索词 → AnySearch 检索 → 去重提纯 → 输出结构化文档
+  <b>基于 AnySearch API 的 AI 知识收集与深度分析工具</b><br>
+  检索 → 四步分析 → 3:4 信息卡片
 </p>
 
 <p align="center">
@@ -17,49 +17,49 @@
 
 ---
 
-一个 shell 脚本 + 一个 Skill 描述，搭出完整的 AI 知识收集管线。适合：行业跟踪、论文检索、技术调研、本地知识库建设。
+不只要"搜到"，更要"读懂"。用五步工作流把碎片信息变成可用的深度洞察。
 
 ## 工作流
 
 ```
-输入主题 → 拆解检索词 → AnySearch 检索 → 去重提纯 → 输出结构化文档
+用户主题 → 拆解检索词 → AnySearch 检索 → 四步分析 → 输出信息卡片
 ```
 
 ### Step 1 — 拆解检索词
 
-收到一个主题后，拆成多个精准检索词。例如"RAG 最新进展"可拆为：
+收到一个主题后，拆成多个精准检索词。例如"RAG 最新进展"：
 
-- `RAG 知识库构建 2025 最佳实践`
-- `RAG 检索增强生成 最新论文 2025`
-- `RAG 企业落地案例`
+- `RAG 检索增强生成 2025 最新进展`
+- `RAG knowledge base production 2025`
+- `RAG evaluation benchmark 2025`
 
-### Step 2 — 调用脚本检索
+### Step 2 — 检索
 
 ```bash
+# 可读输出
 bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
+
+# JSON 输出（供程序化分析）
+bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag] json
 ```
 
-脚本调用 AnySearch API，返回格式化结果 + 原始 JSON。
+### Step 3 — 四步分析
 
-### Step 3 — 去重提纯
+对检索结果逐条分析，合并交叉验证：
 
-Agent 对 JSON 结果做三道工序：
+**① 定位背景** — 判断新闻类型（宏观/行业/突发/舆论），问"替代了什么状态"
 
-1. **去重** — 识别同源/同事件报道，保留信息增量最大的
-2. **提纯** — 去掉广告、SEO 灌水、无关元数据
-3. **结构化** — 按统一格式整理
+**② 拆文本信号** — 谁说的、对谁说、用了什么词、没说什么
 
-### Step 4 — 输出文档
+**③ 利益相关方映射** — 谁受益、谁承压、谁沉默
 
-纯净 Markdown 输出，可直接归档到本地知识库：
+**④ 提启示** — 二阶思维：A→反应→再下一步→对我意味着什么
 
-```
-knowledge-base/
-└── topics/
-    ├── rag/
-    ├── multi-agent/
-    └── llm-ops/
-```
+### Step 4 — 输出信息卡片
+
+3:4 竖版卡片，聚焦一个子话题，包含：关键洞察、定位、文本信号、利益相关方、启示、来源。
+
+多个方向的信息分别出卡。
 
 ## 快速开始
 
@@ -73,22 +73,26 @@ export ANYSEARCH_API_KEY="as_sk_xxxxxx"
 
 # 3. 搜索
 bash scripts/agent-search.sh "RAG 知识库构建" 10 zh-CN
+
+# 4. JSON 模式（供分析）
+bash scripts/agent-search.sh "RAG 知识库构建" 10 zh-CN general.general json
 ```
 
 > 💡 免费注册获取 API Key：[AnySearch Console](https://www.anysearch.com)
 
 ## 脚本参数
 
-```
-bash scripts/agent-search.sh "<query>" [max_results] [language] [tag]
+```bash
+bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
 ```
 
 | 参数 | 说明 | 默认值 |
 |------|------|--------|
 | `query` (必填) | 搜索查询 | — |
 | `max_results` | 返回结果数 (1-20) | 10 |
-| `language` | 语言 `en` / `zh-CN` | `en` |
+| `language` | `en` / `zh-CN` | `en` |
 | `tag` | 能力标签 | `general.general` |
+| `mode` | 输出模式：`normal` / `json` | `normal` |
 
 ### Tag 选择指南
 
@@ -138,7 +142,7 @@ openclaw skills install agent-intel --file agent-intel.skill
 
 ```
 agent-intel/
-├── SKILL.md                    # OpenClaw Skill 主文件
+├── SKILL.md                    # OpenClaw Skill 主文件（含完整工作流与方法论）
 ├── scripts/
 │   └── agent-search.sh         # AnySearch 搜索封装
 ├── references/
