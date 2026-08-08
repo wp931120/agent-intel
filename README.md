@@ -1,12 +1,12 @@
-# 🦞 每日 AI 简报生成器
+# 🦞 每日 Agent 简报
 
 <p align="center">
   <img src="assets/logo.svg" width="600" height="225" alt="Agent Intel Logo">
 </p>
 
 <p align="center">
-  <b>基于 AnySearch API 的每日 AI 动态采集与 HTML 简报生成工具</b><br>
-  检索 → 四维分析（信息/洞察/利益/启示）→ 3:4 HTML 卡片
+  <b>面向 AI Agent 从业者和学习者的每日简报工具</b><br>
+  检索 → 四维分析（信息/洞察/利益/启示）→ 3:4 HTML 卡片（含 SVG 图形）
 </p>
 
 <p align="center">

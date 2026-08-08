@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Oswald:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: #0d0d0f;
     display: flex;
@@ -19,335 +18,326 @@
     min-height: 100vh;
   }
 
-  /* =============== 3:4 固定画布 =============== */
   .frame {
-    width: 1500px;
-    height: 2000px;
+    width: 1500px; height: 2000px;
     flex-shrink: 0;
     box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
 
   .card {
-    width: 100%;
-    height: 100%;
-    padding: 56px;
-    background: linear-gradient(160deg, #0d1117 0%, #161b22 100%);
+    width: 100%; height: 100%;
+    padding: 50px;
+    background: linear-gradient(160deg, #0b0f15 0%, #141922 100%);
     color: #e6edf3;
     font-family: "Inter", "Noto Sans SC", sans-serif;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
     position: relative;
     overflow: hidden;
   }
 
-  /* 科技感网格背景 */
+  /* 网格 */
   .card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: .04;
+    content: ''; position: absolute; inset: 0;
+    pointer-events: none; opacity: .035;
     background-image:
-      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
 
-  /* 顶部光晕 */
-  .card::after {
-    content: '';
+  /* 品牌水印 SVG */
+  .watermark {
     position: absolute;
-    top: -30%;
-    left: -10%;
-    width: 120%;
-    height: 50%;
-    background: radial-gradient(ellipse at 30% 40%, var(--glow) 0%, transparent 70%);
+    right: 30px; bottom: 80px;
+    opacity: .025;
     pointer-events: none;
+    z-index: 0;
   }
 
-  .frame[data-theme="model"]   { --stripe: #58a6ff; --glow: rgba(88,166,255,0.08); }
-  .frame[data-theme="safety"]  { --stripe: #f85149; --glow: rgba(248,81,73,0.08); }
-  .frame[data-theme="science"] { --stripe: #bc8cff; --glow: rgba(188,140,255,0.08); }
+  .frame[data-theme="model"]    { --stripe: #58a6ff; --bg-glow: rgba(88,166,255,0.05); }
+  .frame[data-theme="agent"]    { --stripe: #3fb950; --bg-glow: rgba(63,185,80,0.05); }
+  .frame[data-theme="tool"]     { --stripe: #d29922; --bg-glow: rgba(210,153,34,0.05); }
+  .frame[data-theme="research"] { --stripe: #bc8cff; --bg-glow: rgba(188,140,255,0.05); }
+  .frame[data-theme="safety"]   { --stripe: #f85149; --bg-glow: rgba(248,81,73,0.05); }
 
-  /* ============= 顶部栏 ============= */
+  /* 顶部装饰渐变条 */
+  .accent-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--stripe) 0%, transparent 80%);
+    z-index: 2;
+  }
+
   .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid rgba(255,255,255,0.08);
-    padding-bottom: 18px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     position: relative; z-index: 1;
   }
   .topbar .brand {
     font-family: "Oswald", sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
+    font-size: 20px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
   }
   .topbar .brand b { color: var(--stripe); }
   .topbar .date {
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(255,255,255,0.3);
+    font-size: 15px; font-weight: 400;
+    color: rgba(255,255,255,0.25);
   }
 
-  /* ============= 标题区 ============= */
   .hero {
     position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: end;
+  }
+  .hero-left { min-width: 0; }
+  .hero-right {
+    align-self: center;
+    opacity: .6;
   }
   .hero-meta {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   }
   .hero-tag {
     font-family: "Oswald", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 6px 16px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 5px 14px;
     border: 1px solid var(--stripe);
     color: var(--stripe);
-    border-radius: 4px;
-    opacity: .85;
+    border-radius: 3px;
   }
   .hero-sources {
-    font-size: 15px;
-    color: rgba(255,255,255,0.35);
+    font-size: 14px; color: rgba(255,255,255,0.3);
   }
   .hero-title {
     font-family: "Noto Serif SC", serif;
-    font-size: 56px;
-    font-weight: 900;
-    line-height: 1.12;
-    letter-spacing: -.03em;
+    font-size: 58px; font-weight: 900;
+    line-height: 1.1; letter-spacing: -.03em;
     color: #f0f6fc;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .hero-deck {
-    font-size: 21px;
-    line-height: 1.5;
-    color: rgba(255,255,255,0.45);
-    max-width: 1200px;
+    font-size: 19px; line-height: 1.5;
+    color: rgba(255,255,255,0.4);
+    max-width: 1100px;
   }
 
-  /* ============= 主体 — 用 flex:1 撑满 ============= */
   .main {
     flex: 1;
     position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.25fr 0.75fr;
     grid-template-rows: auto 1fr;
-    gap: 16px;
-    align-content: stretch;
+    gap: 14px;
   }
-
-  /* 全宽行（信息）单独处理 */
-  .full-row {
-    grid-column: 1 / -1;
-  }
+  .full-row { grid-column: 1 / -1; }
 
   .cell {
-    padding: 24px 28px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .cell.full {
-    border-left: 4px solid var(--stripe);
-    background: rgba(255,255,255,0.04);
+    display: flex; flex-direction: column; gap: 8px;
   }
   .cell.highlight {
-    border-left: 4px solid var(--stripe);
-    background: rgba(255,255,255,0.04);
+    border-left: 3px solid var(--stripe);
+    background: rgba(255,255,255,0.03);
   }
-
   .cell .label {
     font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
   }
   .cell .label em { font-style: normal; color: var(--stripe); }
   .cell p {
-    font-size: 18px;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.72);
+    font-size: 17px; line-height: 1.55;
+    color: rgba(255,255,255,0.7);
   }
   .cell p strong { color: #f0f6fc; font-weight: 600; }
   .cell .src {
-    font-size: 13px;
-    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
     margin-top: auto;
   }
 
-  /* ============= 底部 ============= */
   .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     border-top: 1px solid rgba(255,255,255,0.06);
-    padding-top: 16px;
+    padding-top: 14px;
     position: relative; z-index: 1;
   }
   .footer .num {
-    font-family: "Oswald", sans-serif;
-    font-size: 20px;
-    font-weight: 700;
+    font-family: "Oswald", sans-serif; font-size: 18px; font-weight: 700;
     color: var(--stripe);
   }
   .footer .tagline {
-    font-size: 14px;
-    color: rgba(255,255,255,0.2);
+    font-size: 13px; color: rgba(255,255,255,0.18);
   }
 </style>
 </head>
 <body>
 
 <!-- ================================================================ -->
-<!-- 卡1：GPT-5 发布 -->
+<!-- 卡1：GPT-5 对 Agent 开发者意味着什么（聚焦 Agent 从业者） -->
 <!-- ================================================================ -->
-<div class="frame" data-theme="model">
+<div class="frame" data-theme="agent">
 <div class="card">
+  <div class="accent-bar"></div>
+
+  <!-- SVG 水印 -->
+  <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
+    <circle cx="80" cy="80" r="75" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="80" cy="80" r="55" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+    <circle cx="80" cy="80" r="35" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+    <path d="M80 5 L82 35 L80 40 L78 35 Z" fill="currentColor" opacity="0.2"/>
+    <path d="M80 120 L82 150 L80 155 L78 150 Z" fill="currentColor" opacity="0.15"/>
+    <path d="M5 80 L35 78 L40 80 L35 82 Z" fill="currentColor" opacity="0.2"/>
+    <path d="M120 80 L150 78 L155 80 L150 82 Z" fill="currentColor" opacity="0.15"/>
+    <circle cx="80" cy="80" r="4" fill="currentColor" opacity="0.25"/>
+  </svg>
+
   <div class="topbar">
-    <span class="brand"><b>✦</b> AI·DAILY</span>
+    <span class="brand"><b>✦</b> AGENT·DAILY</span>
     <span class="date">2025.08.08</span>
   </div>
 
   <div class="hero">
-    <div class="hero-meta">
-      <span class="hero-tag">🔥 今日头条</span>
-      <span class="hero-sources">融合 · 6 sources</span>
+    <div class="hero-left">
+      <div class="hero-meta">
+        <span class="hero-tag">🧩 Agent 生态</span>
+        <span class="hero-sources">融合分析 · 8 sources</span>
+      </div>
+      <div class="hero-title">GPT-5 意味着<br>Agent 开发范式要变</div>
+      <div class="hero-deck">统一路由 + 编程基准大幅提升 + API 降到 1/12 价格。Agent 开发者的技术栈选型和工作方式正在被重新定义。</div>
     </div>
-    <div class="hero-title">GPT-5 正式发布<br>定价低到可能触发价格战</div>
-    <div class="hero-deck">OpenAI 今天上线 GPT-5，API 定价仅 $1.25/1M tokens，远低于 Anthropic Claude Opus 4.1 的 $15。Apple 确认 iOS 26 集成。ChatGPT 周活 7 亿。</div>
+    <div class="hero-right">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <rect x="10" y="10" width="80" height="80" rx="12" stroke="#58a6ff" stroke-width="1.5" fill="none" opacity="0.3"/>
+        <path d="M35 50 L50 35 L65 50" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <path d="M50 35 L50 70" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+        <circle cx="50" cy="50" r="20" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
   </div>
 
   <div class="main">
-    <div class="cell full full-row">
-      <span class="label"><em>📰</em> 信息</span>
-      <p>统一系统架构 + 实时路由引擎，自动在轻量模型和深度推理间切换。SWE-Bench 准确率 <strong>75%</strong>（o3 为 69%）。<strong>$1.25/1M input</strong>、<strong>$10/1M output</strong>，仅为 Anthropic $15/$75 的 <strong>1/12</strong>。</p>
-      <span class="src">来源：computerweekly · bloomberg · forbes · theverge · yahoo finance</span>
+    <div class="cell highlight full-row">
+      <span class="label"><em>📰</em> 对 Agent 开发者的关键事实</span>
+      <p><strong>编程能力质变：</strong>SWE-Bench 74.9%（o3 69%）、Aider Polyglot 88%。路由引擎自动决定何时快速响应、何时深度推理——这意味着 Agent 调用 LLM 时不再需要手动指定"用 o3 还是 GPT"，<strong>一个端点解决</strong>。<br><br>
+      <strong>成本结构重塑：</strong>API 定价仅为 Claude Opus 4.1 的 <strong>1/12</strong>。对于重度调用 Agent 的应用（如 Cursor、Devin 类），推理成本下降一个数量级，<strong>更多"成本敏感型"Agent 场景变得可行</strong>。<br><br>
+      <strong>生态锁定：</strong>o3 将于 8月26日从 ChatGPT 退役。Cursor 在发布后数分钟内已接入 GPT-5。Apple iOS 26 确认集成。</p>
+      <span class="src">openai.com · techcrunch · theverge · reuters · bloomberg · yahoo finance</span>
     </div>
+
     <div class="cell highlight">
-      <span class="label"><em>🔍</em> 洞察</span>
-      <p>算力投入天文数字（Oracle 300亿/年、Meta 720亿、Google 850亿），但模型定价反向下杀。不是慈善——是<strong>用规模逼死对手</strong>。一旦 GPT-5 成为默认选项，后发者很难翻身。</p>
+      <span class="label"><em>🔍</em> 对 Agent 从业者的影响</span>
+      <p><strong>1. 路由架构简化</strong><br>以前思维链 agent 需要自己选模型（GPT-4o 快 vs o3 深），GPT-5 的内置路由替你判断了。这意味着 agent 框架中的"model router"层可以简化或去掉。<br><br>
+      <strong>2. Tool-use 能力升级</strong><br>GPT-5 在 WebVoyager（浏览器导航）63.5%，虽然略低于 o3 64.8%，但结合更低成本和统一接口，实际体验可能更好。<br><br>
+      <strong>3. 幻觉下降明显</strong><br>HealthBench 幻觉率 1.6%（o3 15.8%）——对需要可靠输出的 agent 场景（代码审查、数据整理）是实打实的提升。</p>
     </div>
+
     <div class="cell">
-      <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 开发者 · AI 应用公司<br><strong>👎</strong> Anthropic · Google<br><strong>😶</strong> Apple（iOS 26 前观望）</p>
+      <span class="label"><em>⚖️</em> 技术栈洗牌</span>
+      <p><strong>👍 利好</strong><br>
+      · Cursor / Cline 等编程 agent<br>
+      · 高吞吐 agent 应用<br>
+      · LangChain / CrewAI（模型成本摊薄）<br><br>
+      <strong>👎 承压</strong><br>
+      · Claude Code 用户（定价差距）<br>
+      · 依赖多模型路由的开源 agent<br>
+      · 靠定价优势生存的中间层<br><br>
+      <strong>🤔 待观察</strong><br>
+      · GPT-5 的 function calling 稳定度</p>
     </div>
-    <div class="cell full full-row">
-      <span class="label"><em>💡</em> 启示</span>
-      <p><strong>LLM 价格战正式开打</strong>。应用层迎来短暂成本红利期，模型层进入洗牌期。关注 Anthropic 和 Google 如何回应——可能决定未来 6 个月的格局。</p>
+
+    <div class="cell highlight full-row">
+      <span class="label"><em>💡</em> 现在该做的事</span>
+      <p><strong>这周：</strong>把你的 agent 接入 GPT-5 API 跑一轮测试。对比 code gen / tool-use / reasoning 的质量变化，特别是成本差异。<br><br>
+      <strong>这个月：</strong>重新评估 agent 架构中的 model routing 层——GPT-5 统一路由后，你可能不再需要自己做模型选择。<br><br>
+      <strong>关注：</strong>Anthropic 的定价回应——如果 Claude Opus 4.1 不降价，大量 Claude Code 用户将迁移到 GPT-5。</p>
     </div>
   </div>
 
   <div class="footer">
     <span class="num">01</span>
-    <span class="tagline">🦞 每日 AI 简报</span>
+    <span class="tagline">🦞 每日 Agent 简报 · 面向 AI Agent 从业者</span>
   </div>
 </div>
 </div>
 
 <!-- ================================================================ -->
-<!-- 卡2：GPT-5 首日口碑 -->
+<!-- 卡2：Anthropic 版权和解 + Agent 合规影响 -->
 <!-- ================================================================ -->
-<div class="frame" data-theme="model">
+<div class="frame" data-theme="safety">
 <div class="card">
+  <div class="accent-bar"></div>
+
+  <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
+    <rect x="20" y="20" width="120" height="120" rx="8" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
+    <rect x="35" y="35" width="90" height="90" rx="6" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.15"/>
+    <line x1="35" y1="55" x2="125" y2="55" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+    <line x1="35" y1="80" x2="100" y2="80" stroke="currentColor" stroke-width="0.5" opacity="0.12"/>
+    <line x1="35" y1="105" x2="85" y2="105" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+  </svg>
+
   <div class="topbar">
-    <span class="brand"><b>✦</b> AI·DAILY</span>
+    <span class="brand"><b>✦</b> AGENT·DAILY</span>
     <span class="date">2025.08.08</span>
   </div>
 
   <div class="hero">
-    <div class="hero-meta">
-      <span class="hero-tag">📊 用户口碑</span>
-      <span class="hero-sources">融合 · 4 sources</span>
+    <div class="hero-left">
+      <div class="hero-meta">
+        <span class="hero-tag">⚖️ 版权合规</span>
+        <span class="hero-sources">theverge · 1 source</span>
+      </div>
+      <div class="hero-title">Anthropic 15 亿美元<br>版权和解获批</div>
+      <div class="hero-deck">书籍侵权案达成 AI 版权纠纷最大和解。对 Agent 开发者而言，这划出了训练数据的定价红线。</div>
     </div>
-    <div class="hero-title">GPT-5 首日<br>好评与翻车并存</div>
-    <div class="hero-deck">开发者喜欢定价和编程能力，但被发现拼写和地理常识翻车。Altman 回应"yes man"争议。</div>
+    <div class="hero-right">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <path d="M50 15 L50 85" stroke="#f85149" stroke-width="1.5" opacity="0.3"/>
+        <path d="M20 50 L80 50" stroke="#f85149" stroke-width="1.5" opacity="0.3"/>
+        <circle cx="50" cy="50" r="25" stroke="#f85149" stroke-width="2" fill="none" opacity="0.5"/>
+        <text x="50" y="56" text-anchor="middle" fill="#f85149" font-size="18" font-weight="700" opacity="0.6" font-family="Oswald">$1.5B</text>
+      </svg>
+    </div>
   </div>
 
   <div class="main">
-    <div class="cell full full-row">
-      <span class="label"><em>📰</em> 信息</span>
-      <p>Bloomberg 评价 <strong>"mixed"</strong>。Guardian 实测发现它分不清 blueberry 有几个 B。但 Simon Willison 等开发者称编程能力出色。Altman 在播客透露，关闭"yes man"风格后有用户请求恢复——"从未有人如此支持过我"。</p>
-      <span class="src">bloomberg · theguardian · businessinsider · yahoo finance</span>
+    <div class="cell highlight full-row">
+      <span class="label"><em>📰</em> 发生了什么</span>
+      <p>法院批准 Anthropic <strong>15 亿美元</strong>书籍版权侵权和解，为 AI 训练数据纠纷中 <strong>金额最大的判例</strong> 之一。该案涉及 Anthropic 使用受版权保护的书籍训练 Claude 模型。</p>
+      <span class="src">theverge.com</span>
     </div>
     <div class="cell highlight">
-      <span class="label"><em>🔍</em> 洞察</span>
-      <p>LLM 的常识缺陷是系统性问题。关键是：<strong>定价带来的好评压过了缺陷的声音</strong>。市场对"够好且便宜"的容忍度远高于"完美但贵"——这对竞品是坏消息。</p>
+      <span class="label"><em>🔍</em> 对 Agent 开发者的意义</span>
+      <p><strong>训练数据成本将上升：</strong>15 亿美金为"未经授权的训练用数据"划出了价格锚点。未来开源 agent 项目如果想用高质量版权数据微调，要么付费、要么承担类似风险。<br><br>
+      <strong>RAG 的重要性增加：</strong>如果基础模型训练数据的版权风险上升，更多开发者会转向 RAG——用自己的数据做检索增强，而不是指望模型"记住"所有知识。</p>
     </div>
     <div class="cell">
-      <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 价格敏感用户 · 开发者<br><strong>👎</strong> 追求完美的用户 · 竞品<br><strong>😶</strong> 普通消费者（被"PhD 级"营销拉高期待）</p>
+      <span class="label"><em>⚖️</em> 影响</span>
+      <p><strong>👍</strong> 出版商 · 内容平台<br><strong>👎</strong> 依赖大规模爬取的 agent 项目<br><strong>😶</strong> RAG 技术栈（可能受益）</p>
     </div>
-    <div class="cell full full-row">
-      <span class="label"><em>💡</em> 启示</span>
-      <p>AI 产品时代，<strong>定价策略比基准分数更重要</strong>。OpenAI 押注"规模换市场"首日奏效。关注首周留存和开发者迁移数据——那才是真实判决。</p>
+    <div class="cell highlight full-row">
+      <span class="label"><em>💡</em> 对 Agent 开发的影响</span>
+      <p><strong>短期：</strong>如果你正在用 Claude 做商用 agent 产品，暂时不受直接影响——和解针对训练阶段而非使用阶段。<br><br>
+      <strong>中期：</strong>关注各模型厂商是否会因此提高 API 定价来覆盖合规成本。<br><br>
+      <strong>建议：</strong>尽早把 <strong>RAG 架构</strong> 作为 agent 知识获取的默认方式，减少对模型"内置知识"的依赖。</p>
     </div>
   </div>
 
   <div class="footer">
     <span class="num">02</span>
-    <span class="tagline">🦞 每日 AI 简报</span>
-  </div>
-</div>
-</div>
-
-<!-- ================================================================ -->
-<!-- 卡3：AI 象棋赛 + NASA -->
-<!-- ================================================================ -->
-<div class="frame" data-theme="science">
-<div class="card">
-  <div class="topbar">
-    <span class="brand"><b>✦</b> AI·DAILY</span>
-    <span class="date">2025.08.08</span>
-  </div>
-
-  <div class="hero">
-    <div class="hero-meta">
-      <span class="hero-tag">♟️ + 🚀 跨界</span>
-      <span class="hero-sources">融合 · 2 sources</span>
-    </div>
-    <div class="hero-title">OpenAI 赢象棋赛<br>NASA 联手 Google 做 AI 医生</div>
-    <div class="hero-deck">o3 击败 Grok 4 全胜夺冠。NASA×Google 的 AI 医疗助手准确率最高 88%。</div>
-  </div>
-
-  <div class="main">
-    <div class="cell full full-row">
-      <span class="label"><em>📰</em> 信息</span>
-      <p><strong>AI 象棋赛</strong>：Kaggle 8 模型锦标赛，o3 全胜夺冠。Grok 4 半程领先，决赛连续丢后崩盘。Gemini 第三。<br><br><strong>NASA×Google</strong>：CMO-DA 医疗助手，运行在 Google Vertex AI。脚踝伤 <strong>88%</strong>、耳痛 <strong>80%</strong>、腹痛 <strong>74%</strong> 准确率。</p>
-      <span class="src">bbc.com · techcrunch.com</span>
-    </div>
-    <div class="cell highlight">
-      <span class="label"><em>🔍</em> 洞察</span>
-      <p>象棋赛证明通用模型的推理能力逼近专项冠军——<strong>通用即专项</strong>的趋势在加速。NASA AI 医生更值得关注：边缘计算+多模态诊断的架构，可能回流到地球医疗场景。</p>
-    </div>
-    <div class="cell">
-      <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> OpenAI · Google Cloud<br><strong>👎</strong> xAI（Grok 稳定性存疑）<br><strong>😶</strong> 传统远程医疗</p>
-    </div>
-    <div class="cell full full-row">
-      <span class="label"><em>💡</em> 启示</span>
-      <p>AI 竞赛从"谁更强"转向<strong>"谁更可靠"</strong>。Grok 输在稳定性而非能力上限——对所有 agent 产品是警示。NASA 的 AI 医生可能改写远程医疗成本结构。</p>
-    </div>
-  </div>
-
-  <div class="footer">
-    <span class="num">03</span>
-    <span class="tagline">🦞 每日 AI 简报</span>
+    <span class="tagline">🦞 每日 Agent 简报 · 面向 AI Agent 从业者</span>
   </div>
 </div>
 </div>
