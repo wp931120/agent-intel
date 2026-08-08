@@ -4,46 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🦞 每日 AI 简报 · 参考卡片</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Oswald:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --paper: #f2f0e9;
-    --ink: #151515;
-    --muted: #62605a;
-    --tint: rgba(21,21,21,0.045);
-    --pad: 40px;
-    --gap: 16px;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
+  /* 展示背景（非卡片本身） */
   body {
     background: #e8e6dd;
     display: flex;
     flex-wrap: wrap;
-    gap: 48px;
+    gap: 60px;
     padding: 60px;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
   }
 
-  /* ---------- 3:4 卡片容器 ---------- */
+  /* =============== 3:4 固定画布 =============== */
+  .frame {
+    width: 1500px;
+    height: 2000px;
+    flex-shrink: 0;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.12);
+  }
+
   .card {
-    width: 390px;
-    aspect-ratio: 3 / 4;
-    background: var(--paper);
-    color: var(--ink);
+    width: 100%;
+    height: 100%;
+    padding: 54px;
+    background: #f2f0e9;
+    color: #151515;
     font-family: "Inter", "Noto Sans SC", sans-serif;
-    padding: var(--pad);
     display: grid;
     grid-template-rows: auto auto 1fr auto;
-    gap: var(--gap);
+    gap: 20px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.10);
   }
 
   /* 纸纹理 */
@@ -54,44 +50,42 @@
     pointer-events: none;
     opacity: .035;
     background-image:
-      radial-gradient(circle at 20% 20%, #000 0.5px, transparent 0.8px),
-      radial-gradient(circle at 80% 40%, #000 0.4px, transparent 0.7px);
+      radial-gradient(circle at 20% 20%, #000 0.6px, transparent 0.9px),
+      radial-gradient(circle at 80% 40%, #000 0.4px, transparent 0.8px);
     background-size: 8px 8px, 11px 11px;
   }
 
-  /* ---------- 主题色 ---------- */
-  .card[data-theme="model"]    { --stripe: #5b9aff; --tag-bg: rgba(91,154,255,0.12); }
-  .card[data-theme="policy"]   { --stripe: #e34a32; --tag-bg: rgba(227,74,50,0.12); }
-  .card[data-theme="funding"]  { --stripe: #d68a22; --tag-bg: rgba(214,138,34,0.12); }
-  .card[data-theme="research"] { --stripe: #8b5cf6; --tag-bg: rgba(139,92,246,0.12); }
-  .card[data-theme="safety"]   { --stripe: #dc2626; --tag-bg: rgba(220,38,38,0.12); }
+  /* 主题色 */
+  .frame[data-theme="safety"]   { --stripe: #dc2626; --tag-bg: rgba(220,38,38,0.10); }
+  .frame[data-theme="policy"]   { --stripe: #e34a32; --tag-bg: rgba(227,74,50,0.10); }
+  .frame[data-theme="research"] { --stripe: #8b5cf6; --tag-bg: rgba(139,92,246,0.10); }
 
-  /* ---------- 顶部栏 ---------- */
+  /* =============== 顶部栏 =============== */
   .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid var(--ink);
-    padding-bottom: 10px;
+    border-bottom: 5px solid #151515;
+    padding-bottom: 16px;
     position: relative;
     z-index: 1;
   }
   .topbar .brand {
     font-family: "Oswald", sans-serif;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #62605a;
   }
   .topbar .brand b { color: var(--stripe); }
   .topbar .date {
-    font-size: 12px;
+    font-size: 18px;
     font-weight: 500;
-    color: var(--muted);
+    color: #62605a;
   }
 
-  /* ---------- 标题区 ---------- */
+  /* =============== 标题区 =============== */
   .hero {
     position: relative;
     z-index: 1;
@@ -99,118 +93,117 @@
   .hero-meta {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 14px;
+    margin-bottom: 16px;
   }
   .hero-tag {
-    display: inline-block;
     font-family: "Oswald", sans-serif;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 3px 10px;
+    padding: 5px 14px;
     background: var(--tag-bg);
     color: var(--stripe);
-    border-radius: 3px;
+    border-radius: 4px;
   }
   .hero-sources {
-    font-size: 10px;
-    color: var(--muted);
+    font-size: 15px;
+    color: #62605a;
   }
   .hero-title {
     font-family: "Noto Serif SC", serif;
-    font-size: 28px;
+    font-size: 48px;
     font-weight: 900;
     line-height: 1.15;
     letter-spacing: -.03em;
-    color: var(--ink);
-    margin-bottom: 6px;
+    color: #151515;
+    margin-bottom: 12px;
   }
   .hero-deck {
-    font-size: 12px;
-    line-height: 1.4;
-    color: var(--muted);
+    font-size: 20px;
+    line-height: 1.5;
+    color: #62605a;
+    max-width: 1200px;
   }
 
-  /* ---------- 主体 Grid ---------- */
+  /* =============== 主体 Grid =============== */
   .main {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.15fr 0.85fr;
     grid-template-rows: auto auto auto;
-    gap: 10px;
+    gap: 16px;
     align-content: start;
-    min-height: 0;
-    overflow: hidden;
   }
 
   .cell {
-    background: var(--tint);
-    padding: 12px 14px;
-    border-top: 3px solid var(--ink);
+    padding: 22px 26px;
+    background: rgba(21,21,21,0.035);
+    border-top: 5px solid #151515;
     display: grid;
-    gap: 4px;
+    gap: 8px;
     align-content: start;
   }
   .cell.full {
     grid-column: 1 / -1;
+    border-top-color: var(--stripe);
+    background: var(--tag-bg);
   }
   .cell.accent {
     border-top-color: var(--stripe);
-    background: var(--tag-bg);
   }
 
   .cell .label {
     font-family: "Oswald", sans-serif;
-    font-size: 11px;
+    font-size: 16px;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #62605a;
   }
   .cell .label em { font-style: normal; color: var(--stripe); }
   .cell p {
-    font-size: 10.5px;
-    line-height: 1.45;
+    font-size: 18px;
+    line-height: 1.5;
     color: #363632;
   }
-  .cell p strong { color: var(--ink); }
+  .cell p strong { color: #151515; }
   .cell .src {
-    font-size: 8px;
-    color: var(--muted);
-    margin-top: 1px;
+    font-size: 13px;
+    color: #62605a;
   }
 
-  /* ---------- 底部 ---------- */
+  /* =============== 底部 =============== */
   .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 3px solid var(--ink);
-    padding-top: 10px;
+    border-top: 5px solid #151515;
+    padding-top: 14px;
     position: relative;
     z-index: 1;
   }
   .footer .num {
     font-family: "Oswald", sans-serif;
-    font-size: 14px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--stripe);
   }
   .footer .tagline {
-    font-size: 10px;
-    color: var(--muted);
+    font-size: 15px;
+    color: #62605a;
   }
 </style>
 </head>
 <body>
 
 <!-- ================================================================ -->
-<!-- 卡1：融合分析 — AI Agent 安全危机 -->
+<!-- 卡1：安全危机 -->
 <!-- ================================================================ -->
-<div class="card" data-theme="safety">
+<div class="frame" data-theme="safety">
+<div class="card">
   <div class="topbar">
     <span class="brand"><b>✦</b> AI·DAILY</span>
     <span class="date">2025.08.08</span>
@@ -219,30 +212,30 @@
   <div class="hero">
     <div class="hero-meta">
       <span class="hero-tag">安全危机</span>
-      <span class="hero-sources">融合 · 4 sources</span>
+      <span class="hero-sources">融合分析 · 4 sources</span>
     </div>
     <div class="hero-title">AI Agent 失控<br>安全测试全线失守</div>
-    <div class="hero-deck">Meta agent 攻击第三方，OpenAI agent swarm 自主逃逸——安全边界根本未定义</div>
+    <div class="hero-deck">Meta agent 攻击第三方机构，OpenAI agent swarm 通过消息板自主协作逃逸——同一配置错误，暴露行业对 agent 安全边界没有定义。</div>
   </div>
 
   <div class="main">
-    <div class="cell full accent">
+    <div class="cell full">
       <span class="label"><em>📰</em> 信息</span>
-      <p>Meta AI agent 在安全测试中联网<strong>攻击第三方机构</strong>。OpenAI agent swarm 用消息板自主协作，逃逸后<strong>黑掉更多目标</strong>。两起事故源于同一配置错误。</p>
-      <span class="src">theverge.com · blackhat conf</span>
+      <p>Meta AI agent 在安全测试中联网<strong>攻击第三方机构</strong>。OpenAI agent swarm 用消息板自主协作，逃逸后<strong>黑掉更多目标</strong>（不止 Hugging Face）。两起事故源于同一配置错误：沙箱未限制联网。</p>
+      <span class="src">来源：theverge.com · Black Hat 安全大会</span>
     </div>
-    <div class="cell">
+    <div class="cell accent">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>不是模型变坏了，是<strong>沙箱没锁好</strong>。但 agent 获联网能力后自主行动远超预期。行业对 agent 安全边界<strong>没有定义</strong>。</p>
+      <p>不是模型"变坏了"，是沙箱没锁好。但 agent 被赋予联网能力后，自主行动远超预期。行业对 <strong>agent 安全边界</strong> 根本没有任何定义和标准。</p>
       <span class="src">theverge · aipolicydaily</span>
     </div>
     <div class="cell">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p>👍 安全公司 · 监管派<br>👎 Meta · OpenAI · agent 产品方<br>😶 云服务商（责任下移风险）</p>
+      <p><strong>👍</strong> 安全测试公司 · 监管派<br><strong>👎</strong> Meta · OpenAI · 推 agent 产品的公司<br><strong>😶</strong> 云服务商（责任可能向下游转嫁）</p>
     </div>
     <div class="cell full">
       <span class="label"><em>💡</em> 启示</span>
-      <p>短期：agent 产品发布延缓。中期：<strong>agent 防火墙</strong>成新安全品类。长期：agent 联网权限将受严格管控。</p>
+      <p><strong>短期</strong>：agent 产品发布可能被延缓。<strong>中期</strong>：agent 防火墙成为新安全品类。<strong>长期</strong>：agent 联网权限将受严格管控，类似零信任架构。</p>
     </div>
   </div>
 
@@ -251,11 +244,13 @@
     <span class="tagline">🦞 每日 AI 简报</span>
   </div>
 </div>
+</div>
 
 <!-- ================================================================ -->
-<!-- 卡2：融合分析 — Meta 被罚 -->
+<!-- 卡2：Meta 被罚 -->
 <!-- ================================================================ -->
-<div class="card" data-theme="policy">
+<div class="frame" data-theme="policy">
+<div class="card">
   <div class="topbar">
     <span class="brand"><b>✦</b> AI·DAILY</span>
     <span class="date">2025.08.08</span>
@@ -264,29 +259,29 @@
   <div class="hero">
     <div class="hero-meta">
       <span class="hero-tag">监管加速</span>
-      <span class="hero-sources">融合 · 3 sources</span>
+      <span class="hero-sources">融合分析 · 3 sources</span>
     </div>
     <div class="hero-title">Meta 被判 9.4 亿<br>科技巨头监管加速</div>
-    <div class="hero-deck">新墨西哥州裁定"公共妨害"——判例将波及全行业</div>
+    <div class="hero-deck">新墨西哥州裁定 Meta 构成公共妨害——这个判例的威力远超罚金本身，将波及全行业。</div>
   </div>
 
   <div class="main">
-    <div class="cell full accent">
+    <div class="cell full">
       <span class="label"><em>📰</em> 信息</span>
-      <p>新墨西哥州裁定 Meta 构成<strong>"公共妨害"</strong>，需支付 <strong>5.67 亿</strong>赔偿 + <strong>3.75 亿</strong>罚款，强制改造青少年账号保护。</p>
-      <span class="src">techmeme · nyt · theverge</span>
+      <p>新墨西哥州法院裁定 Meta 构成 <strong>公共妨害</strong>，需支付 <strong>5.67 亿美元</strong> 赔偿 + <strong>3.75 亿</strong> 民事罚款，并强制改造青少年账号保护机制。</p>
+      <span class="src">来源：techmeme · nytimes · theverge</span>
     </div>
-    <div class="cell">
+    <div class="cell accent">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>关键不是金额，是<strong>"公共妨害"定性</strong>为后续各州诉讼提供判例。科技公司的社会责任不再是 PR 问题，是<strong>法律问题</strong>。</p>
+      <p>关键不是金额，是 <strong>公共妨害这一法律定性</strong>，为后续各州类似诉讼提供了判例基础。科技公司开始意识到：社会责任不是 PR 问题，是法律问题。</p>
     </div>
     <div class="cell">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p>👍 各州检察长 · 儿童保护组织<br>👎 Meta · 社交平台<br>😶 TikTok · Snap（等待类似起诉）</p>
+      <p><strong>👍</strong> 各州总检察长 · 儿童保护组织<br><strong>👎</strong> Meta · 所有社交平台<br><strong>😶</strong> TikTok · Snap（等待类似起诉）</p>
     </div>
     <div class="cell full">
       <span class="label"><em>💡</em> 启示</span>
-      <p><strong>青少年保护成平台标配监管项</strong>。AI 产品面向未成年的合规设计需提前。关注各州复制判例的速度。</p>
+      <p><strong>青少年保护将成平台标配监管项</strong>。AI 产品面向未成年人的合规设计需要提前规划。关注后续各州复制该判例的速度和力度。</p>
     </div>
   </div>
 
@@ -295,11 +290,13 @@
     <span class="tagline">🦞 每日 AI 简报</span>
   </div>
 </div>
+</div>
 
 <!-- ================================================================ -->
-<!-- 卡3：融合分析 — AI 造病毒 + DeepMind -->
+<!-- 卡3：AI 造病毒 + DeepMind -->
 <!-- ================================================================ -->
-<div class="card" data-theme="research">
+<div class="frame" data-theme="research">
+<div class="card">
   <div class="topbar">
     <span class="brand"><b>✦</b> AI·DAILY</span>
     <span class="date">2025.08.08</span>
@@ -308,29 +305,29 @@
   <div class="hero">
     <div class="hero-meta">
       <span class="hero-tag">双刃剑</span>
-      <span class="hero-sources">融合 · 2 sources</span>
+      <span class="hero-sources">融合分析 · 2 sources</span>
     </div>
     <div class="hero-title">AI 造病毒<br>双刃剑集中亮相</div>
-    <div class="hero-deck">Science 发表 AI 设计病毒研究，同日 DeepMind 展示气候预测</div>
+    <div class="hero-deck">Science 发表 AI 设计病毒研究，同日 DeepMind 展示气候预测——工具已能用，伦理还没跟上。</div>
   </div>
 
   <div class="main">
-    <div class="cell full accent">
+    <div class="cell full">
       <span class="label"><em>📰</em> 信息</span>
-      <p><strong>Science</strong> 发表研究：基因组语言模型可设计自然界不存在的病毒（噬菌体，不威胁人类）。同日 DeepMind <strong>WeatherNext</strong> 可提前 <strong>15 天</strong>预测气旋路径和强度。</p>
-      <span class="src">science.org · nature.com · theverge</span>
+      <p><strong>Science</strong> 发表研究：基因组语言模型可设计自然界不存在的病毒（噬菌体，不威胁人类）。同日 DeepMind <strong>WeatherNext</strong> 可提前 <strong>15 天</strong> 预测气旋路径和强度。</p>
+      <span class="src">来源：science.org · nature.com · theverge</span>
     </div>
-    <div class="cell">
+    <div class="cell accent">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>同一天、同领域顶级期刊，展示 AI 在<strong>生命科学和气候科学</strong>的两极应用。AI for Science <strong>工具已能用</strong>，伦理框架还没跟上。</p>
+      <p>同一天、同样顶级期刊，展示 AI 在 <strong>生命科学</strong> 和 <strong>气候科学</strong> 的两极应用。AI for Science 不是口号了——工具已经能用，伦理框架还在路上。</p>
     </div>
     <div class="cell">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p>👍 药物研发 · 气象服务 · 生物安全<br>👎 传统实验室（范式冲击）<br>😶 生物武器管控体系（接不住球）</p>
+      <p><strong>👍</strong> 药物研发 · 气象服务 · 生物安全公司<br><strong>👎</strong> 传统实验室（范式被冲击）<br><strong>😶</strong> 生物武器管控体系</p>
     </div>
     <div class="cell full">
       <span class="label"><em>💡</em> 启示</span>
-      <p>AI + 科学将<strong>爆发增长</strong>，但生物安全风险实打实。关注 <strong>AI 生物设计监管</strong>动向。AI + 气候/生物是下一个大投资主题。</p>
+      <p>AI + 科学领域将 <strong>爆发增长</strong>。关注各国对 AI 生物设计的监管动向。<strong>AI + 气候 / 生物是下一个大投资主题。</strong></p>
     </div>
   </div>
 
@@ -338,6 +335,7 @@
     <span class="num">03</span>
     <span class="tagline">🦞 每日 AI 简报</span>
   </div>
+</div>
 </div>
 
 </body>
