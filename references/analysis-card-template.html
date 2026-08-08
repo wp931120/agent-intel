@@ -6,7 +6,7 @@
 <title>🦞 每日 AI 简报 · 参考卡片</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;700;900&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -21,15 +21,15 @@
   }
 
   /* ====================================
-     3:4 卡片 — 1080×1440 比例
-     实际宽高 378×504px
+     3:4 卡片 — 主次布局
+     主区（标题/关键洞察）占 35%
+     次区（四维）占 65%
      ==================================== */
   .card {
     width: 378px;
     height: 504px;
     background: linear-gradient(165deg, #121214 0%, #1a1a1e 100%);
     border-radius: 28px;
-    position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -37,144 +37,177 @@
     color: #e8e8ed;
     box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
   }
   .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 28px 72px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08);
   }
 
-  /* 顶部装饰光晕 */
-  .card::before {
+  /* ---- 主题色变量 ---- */
+  .card[data-theme="model"]     { --accent: #5b9aff; --accent-glow: rgba(91,154,255,0.12); }
+  .card[data-theme="policy"]    { --accent: #ff6b6b; --accent-glow: rgba(255,107,107,0.12); }
+  .card[data-theme="funding"]   { --accent: #ffb347; --accent-glow: rgba(255,179,71,0.12); }
+  .card[data-theme="research"]  { --accent: #c084fc; --accent-glow: rgba(192,132,252,0.12); }
+  .card[data-theme="merger"]    { --accent: #4dd0e1; --accent-glow: rgba(77,208,225,0.12); }
+
+  /* ====================================
+     主区 — 标题 + 一句话
+     ==================================== */
+  .card-hero {
+    height: 35%;
+    padding: 28px 28px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  /* 背景光晕 */
+  .card-hero::before {
     content: '';
     position: absolute;
-    top: -60%;
-    left: -30%;
-    width: 160%;
-    height: 80%;
-    background: radial-gradient(ellipse at 30% 40%, rgba(120, 220, 160, 0.06) 0%, transparent 70%);
+    top: -30%;
+    left: -20%;
+    width: 140%;
+    height: 120%;
+    background: radial-gradient(ellipse at 30% 40%, var(--accent-glow) 0%, transparent 70%);
     pointer-events: none;
   }
 
-  /* 底部渐变条 */
-  .card::after {
+  /* 底部渐变遮罩 */
+  .card-hero::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--accent) 70%, transparent 100%);
-    opacity: 0.6;
+    height: 50%;
+    background: linear-gradient(to top, #121214 0%, transparent 100%);
+    pointer-events: none;
   }
 
-  /* ---- 卡片变量 ---- */
-  .card[data-theme="model"] { --accent: #5b9aff; }
-  .card[data-theme="policy"] { --accent: #ff6b6b; }
-  .card[data-theme="funding"] { --accent: #ffb347; }
-  .card[data-theme="research"] { --accent: #c084fc; }
-
-  /* ---- 头部 ---- */
-  .card-top {
-    padding: 28px 28px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  .card-tag {
+  .hero-tag {
     font-family: "Outfit", sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 2.5px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--accent);
-    padding: 5px 14px;
-    border: 1px solid var(--accent);
-    border-radius: 40px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
     opacity: 0.8;
   }
-  .card-date {
+
+  .hero-number {
     font-family: "Outfit", sans-serif;
-    font-size: 11px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 0.5px;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.08;
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    line-height: 1;
+    pointer-events: none;
   }
 
-  /* ---- 品牌标志 ---- */
-  .card-brand {
-    padding: 14px 28px 0;
+  .hero-title {
+    font-family: "Outfit", "Noto Sans SC", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+  }
+
+  .hero-one-liner {
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.5);
     position: relative;
     z-index: 1;
   }
-  .card-brand span {
-    font-family: "Outfit", sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    color: rgba(255,255,255,0.15);
-    text-transform: uppercase;
-  }
 
-  /* ---- 内容体 ---- */
+  /* ====================================
+     次区 — 四维 + 来源信息
+     ==================================== */
   .card-body {
     flex: 1;
-    padding: 12px 28px 0;
-    overflow: hidden;
+    padding: 0 28px 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
     position: relative;
     z-index: 1;
   }
 
   .card-item {
-    background: rgba(255,255,255,0.03);
-    border-radius: 14px;
-    padding: 11px 15px;
+    border-radius: 10px;
+    padding: 8px 14px;
     border-left: 2px solid var(--accent);
+    background: rgba(255,255,255,0.02);
     transition: background 0.2s;
   }
   .card-item:hover {
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.05);
   }
 
-  .card-item .icon {
-    font-size: 11px;
-    margin-right: 5px;
-    opacity: 0.6;
+  .card-item .meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
   }
   .card-item .label {
     font-family: "Outfit", sans-serif;
-    font-size: 9px;
+    font-size: 8.5px;
     font-weight: 700;
-    letter-spacing: 1.8px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--accent);
-    opacity: 0.7;
-    display: block;
-    margin-bottom: 4px;
+    opacity: 0.65;
+  }
+  .card-item .sources {
+    font-family: "Outfit", sans-serif;
+    font-size: 7.5px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.2);
+  }
+  .card-item .sources span {
+    color: var(--accent);
+    opacity: 0.5;
   }
   .card-item p {
     font-size: 10.5px;
-    line-height: 1.55;
+    line-height: 1.5;
     font-weight: 300;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.7);
   }
   .card-item p strong {
     color: #fff;
     font-weight: 600;
   }
 
+  /* ---- 单一来源（紧凑） ---- */
+  .card-item.compact {
+    padding: 6px 14px;
+  }
+  .card-item.compact .meta { display: none; }
+
   /* ---- 底部 ---- */
   .card-footer {
-    padding: 16px 28px 22px;
+    padding: 12px 28px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: 4px;
     position: relative;
     z-index: 1;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    margin-top: 6px;
   }
   .card-footer .brand {
     font-family: "Outfit", sans-serif;
@@ -183,33 +216,81 @@
     letter-spacing: 2px;
     color: rgba(255,255,255,0.2);
   }
-  .card-footer .source {
+  .card-footer .date {
     font-family: "Outfit", sans-serif;
     font-size: 9px;
-    font-weight: 500;
-    color: var(--accent);
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-  }
-  .card-footer .source:hover {
-    opacity: 1;
+    font-weight: 300;
+    color: rgba(255,255,255,0.15);
   }
 </style>
 </head>
 <body>
 
-<!-- ============ 卡片 1：模型发布 ============ -->
+<!-- ================================================================
+     融合分析示例：一条选题，融合多个来源
+     主题：GPT-5 发布对行业的影响
+     ================================================================ -->
 <div class="card" data-theme="model">
-  <div class="card-top">
-    <span class="card-tag">✦ 模型发布</span>
-    <span class="card-date">2025.08.08</span>
+  <div class="card-hero">
+    <div class="hero-number">01</div>
+    <div class="hero-tag">✦ 融合分析 · 3 sources</div>
+    <div class="hero-title">GPT-5 发布<br>应用层大洗牌</div>
+    <div class="hero-one-liner">
+      OpenAI 在 DevDay 上发布了 GPT-5，推理能力大幅跃升
+    </div>
   </div>
-  <div class="card-brand"><span>AI · DAILY</span></div>
+  <div class="card-body">
+    <div class="card-item">
+      <div class="meta">
+        <span class="label">信息</span>
+        <span class="sources"><span>·</span> openai.com · techcrunch.com</span>
+      </div>
+      <p>GPT-5 推理能力较 4o 提升 <strong>65%</strong>，支持 <strong>1M token</strong> 上下文，API 价格上浮 <strong>30%</strong>。同时发布 Agent SDK 2.0。</p>
+    </div>
+    <div class="card-item">
+      <div class="meta">
+        <span class="label">洞察</span>
+        <span class="sources"><span>·</span> theverge.com · 分析综合</span>
+      </div>
+      <p>这代关键词是<strong>"自主性"</strong>——Agent SDK 2.0 比模型本身更重要。OpenAI 在押注 AI 从"回答问题"转向"完成任务"。</p>
+    </div>
+    <div class="card-item">
+      <div class="meta">
+        <span class="label">利益</span>
+        <span class="sources"><span>·</span> 竞品分析 · 行业反应</span>
+      </div>
+      <p>👍 应用层开发者 · OpenAI 生态伙伴<br>👎 竞品模型（Anthropic、Google）· 纯 API 中转生意<br>😶 开源社区（GPT-5 仍闭源）</p>
+    </div>
+    <div class="card-item">
+      <div class="meta">
+        <span class="label">启示</span>
+        <span class="sources"><span>·</span> 二阶推演</span>
+      </div>
+      <p>短期：Agent 类创业会更热。中期：闭源模型的 Agent 生态锁定效应增强。关注 <strong>Anthropic 的回应策略</strong>。</p>
+    </div>
+  </div>
+  <div class="card-footer">
+    <span class="brand">🦞 每日 AI 简报</span>
+    <span class="date">2025.08.08</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     单事件卡片：模型发布
+     ================================================================ -->
+<div class="card" data-theme="model">
+  <div class="card-hero">
+    <div class="hero-number">02</div>
+    <div class="hero-tag">✦ 模型发布 · 1 source</div>
+    <div class="hero-title">Claude Sonnet 4<br>提速 40% 不加价</div>
+    <div class="hero-one-liner">
+      Anthropic 锚定"高性价比"路线，抢开发者心智
+    </div>
+  </div>
   <div class="card-body">
     <div class="card-item">
       <span class="label">信息</span>
-      <p>Anthropic 发布 <strong>Claude Sonnet 4</strong>，推理速度提升 <strong>40%</strong>，上下文窗口扩展至 <strong>500K</strong> token，API 价格不变。</p>
+      <p>Anthropic 发布 <strong>Claude Sonnet 4</strong>，推理速度提升 <strong>40%</strong>，上下文窗口扩展至 <strong>500K token</strong>，API 价格不变。</p>
     </div>
     <div class="card-item">
       <span class="label">洞察</span>
@@ -217,7 +298,7 @@
     </div>
     <div class="card-item">
       <span class="label">利益</span>
-      <p>👍 开发者团队 · AI 应用层<br>👎 GPT-5 空窗期竞品 · 中小模型厂商</p>
+      <p>👍 开发者 · AI 应用层公司<br>👎 GPT-5 空窗期的竞品 · 中小模型厂商</p>
     </div>
     <div class="card-item">
       <span class="label">启示</span>
@@ -226,17 +307,22 @@
   </div>
   <div class="card-footer">
     <span class="brand">🦞 每日 AI 简报</span>
-    <span class="source">anthropic.com</span>
+    <span class="date">2025.08.08</span>
   </div>
 </div>
 
-<!-- ============ 卡片 2：政策监管 ============ -->
+<!-- ================================================================
+     融合分析：欧盟 AI 法案
+     ================================================================ -->
 <div class="card" data-theme="policy">
-  <div class="card-top">
-    <span class="card-tag">✦ 政策监管</span>
-    <span class="card-date">2025.08.07</span>
+  <div class="card-hero">
+    <div class="hero-number">03</div>
+    <div class="hero-tag">✦ 融合分析 · 2 sources</div>
+    <div class="hero-title">欧盟 AI 法案<br>数据溯源成新门槛</div>
+    <div class="hero-one-liner">
+      修正案要求披露训练数据来源，2026 Q1 生效
+    </div>
   </div>
-  <div class="card-brand"><span>AI · DAILY</span></div>
   <div class="card-body">
     <div class="card-item">
       <span class="label">信息</span>
@@ -244,82 +330,56 @@
     </div>
     <div class="card-item">
       <span class="label">洞察</span>
-      <p>没提"禁止"而是"披露"，让步于行业压力。但"数据溯源"技术难度极高，<strong>实质门槛比禁令更高</strong>。</p>
+      <p>没提"禁止"而是"披露"，让步于行业。但"数据溯源"技术难度极高，<strong>实质门槛比禁令更高</strong>。</p>
     </div>
     <div class="card-item">
       <span class="label">利益</span>
-      <p>👍 自有数据厂商 · 数据溯源创业公司<br>👎 依赖公开数据的创业团队 · 中国出海模型厂商</p>
+      <p>👍 自有数据厂商 · 数据溯源公司<br>👎 依赖公开数据的创业团队 · 出海厂商</p>
     </div>
     <div class="card-item">
       <span class="label">启示</span>
-      <p><strong>9个月内</strong>需建立数据溯源体系。训练数据管理成新合规赛道。中国企业出海 EU 需提前布局。</p>
+      <p><strong>9个月的倒计时</strong>。训练数据管理成新合规赛道。中国企业出海 EU 需提前布局。</p>
     </div>
   </div>
   <div class="card-footer">
     <span class="brand">🦞 每日 AI 简报</span>
-    <span class="source">europa.eu</span>
+    <span class="date">2025.08.07</span>
   </div>
 </div>
 
-<!-- ============ 卡片 3：融资动态 ============ -->
+<!-- ================================================================
+     融合分析：Cursor 融资 + AI 编程工具赛道
+     ================================================================ -->
 <div class="card" data-theme="funding">
-  <div class="card-top">
-    <span class="card-tag">✦ 融资动态</span>
-    <span class="card-date">2025.08.06</span>
+  <div class="card-hero">
+    <div class="hero-number">04</div>
+    <div class="hero-tag">✦ 融合分析 · 3 sources</div>
+    <div class="hero-title">AI 编程工具<br>应用层收割窗口</div>
+    <div class="hero-one-liner">
+      Cursor 融资折射赛道逻辑：工具层正在吃掉价值
+    </div>
   </div>
-  <div class="card-brand"><span>AI · DAILY</span></div>
   <div class="card-body">
     <div class="card-item">
       <span class="label">信息</span>
-      <p>AI 编程助手 <strong>Cursor</strong> 完成 <strong>2.5 亿美元</strong> C 轮融资，估值 <strong>120 亿美元</strong>。A16Z 领投。</p>
+      <p><strong>Cursor</strong> 完成 <strong>2.5 亿美元</strong> C 轮，估值 <strong>120 亿</strong>。同期 Devin 融资 8000 万，Codeium 年收入翻 3 倍。</p>
     </div>
     <div class="card-item">
       <span class="label">洞察</span>
-      <p>AI 编程赛道估值飙升速度超过模型层。资本判断<strong>"应用层收割"窗口已开</strong>，基础设施红利向工具层转移。</p>
+      <p>AI 编程赛道估值飙升速度 <strong>超过模型层</strong>。资本判断"应用层收割"窗口已开，基础设施红利正向工具层转移。</p>
     </div>
     <div class="card-item">
       <span class="label">利益</span>
-      <p>👍 Cursor · A16Z · 同赛道竞品<br>👎 传统 IDE 厂商 · 外包编程服务</p>
+      <p>👍 Cursor · A16Z · 编程工具赛道<br>👎 传统 IDE · 外包编程 · VS Code 生态</p>
     </div>
     <div class="card-item">
       <span class="label">启示</span>
-      <p>关注下一波被重估的工具赛道：<strong>设计工具</strong>（Figma 替代）、<strong>数据分析</strong>（Excel 替代）。</p>
+      <p>关注下一波重估的工具赛道：<strong>设计工具</strong>、<strong>数据分析</strong>、<strong>文档协作</strong>。谁先 AEI-native 改造谁受益。</p>
     </div>
   </div>
   <div class="card-footer">
     <span class="brand">🦞 每日 AI 简报</span>
-    <span class="source">techcrunch.com</span>
-  </div>
-</div>
-
-<!-- ============ 卡片 4：论文突破 ============ -->
-<div class="card" data-theme="research">
-  <div class="card-top">
-    <span class="card-tag">✦ 论文突破</span>
-    <span class="card-date">2025.08.05</span>
-  </div>
-  <div class="card-brand"><span>AI · DAILY</span></div>
-  <div class="card-body">
-    <div class="card-item">
-      <span class="label">信息</span>
-      <p>Google DeepMind 发布 <strong>AlphaGeometry 2</strong>，IMO 达到<strong>金牌水平</strong>，解题速度较初代提升 <strong>10 倍</strong>。</p>
-    </div>
-    <div class="card-item">
-      <span class="label">洞察</span>
-      <p>IMO 金牌是符号推理的<strong>金标准</strong>。神经符号混合架构而非纯 LLM，这条路可能比"更大模型"更高效。</p>
-    </div>
-    <div class="card-item">
-      <span class="label">利益</span>
-      <p>👍 Google（推理赛道壁垒）· 教育领域<br>👎 OpenAI o 系列（不同路线竞争）· 纯 LLM 派研究者</p>
-    </div>
-    <div class="card-item">
-      <span class="label">启示</span>
-      <p>神经符号混合路线获得<strong>里程碑验证</strong>。关注代码生成、定理证明等场景的商业化落地。</p>
-    </div>
-  </div>
-  <div class="card-footer">
-    <span class="brand">🦞 每日 AI 简报</span>
-    <span class="source">deepmind.google</span>
+    <span class="date">2025.08.06</span>
   </div>
 </div>
 
