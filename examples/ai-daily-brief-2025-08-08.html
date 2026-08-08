@@ -10,9 +10,6 @@
   body {
     background: #0d0d0f;
     display: flex;
-    flex-wrap: wrap;
-    gap: 60px;
-    padding: 60px;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -24,8 +21,7 @@
     box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
   .card {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     padding: 56px;
     background: linear-gradient(160deg, #0d1117 0%, #161b22 100%);
     color: #e6edf3;
@@ -50,158 +46,102 @@
   .card::after {
     content: '';
     position: absolute;
-    top: -30%;
-    left: -10%;
-    width: 120%;
-    height: 50%;
+    top: -30%; left: -10%;
+    width: 120%; height: 50%;
     background: radial-gradient(ellipse at 30% 40%, var(--glow) 0%, transparent 70%);
     pointer-events: none;
   }
-  .frame[data-theme="model"]   { --stripe: #58a6ff; --glow: rgba(88,166,255,0.08); }
-  .frame[data-theme="safety"]  { --stripe: #f85149; --glow: rgba(248,81,73,0.08); }
-  .frame[data-theme="science"] { --stripe: #bc8cff; --glow: rgba(188,140,255,0.08); }
+  .frame { --stripe: #58a6ff; --glow: rgba(88,166,255,0.08); }
 
   .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     border-bottom: 2px solid rgba(255,255,255,0.08);
-    padding-bottom: 18px;
-    position: relative; z-index: 1;
+    padding-bottom: 18px; position: relative; z-index: 1;
   }
   .topbar .brand {
-    font-family: "Oswald", sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
+    font-family: "Oswald", sans-serif; font-size: 22px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.25);
   }
   .topbar .brand b { color: var(--stripe); }
   .topbar .date {
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(255,255,255,0.3);
+    font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.3);
   }
 
   .hero {
     position: relative; z-index: 1;
   }
   .hero-meta {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
   }
   .hero-tag {
-    font-family: "Oswald", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border: 1px solid var(--stripe);
-    color: var(--stripe);
-    border-radius: 4px;
-    opacity: .85;
+    font-family: "Oswald", sans-serif; font-size: 14px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 6px 16px; border: 1px solid var(--stripe);
+    color: var(--stripe); border-radius: 4px; opacity: .85;
   }
   .hero-sources {
-    font-size: 15px;
-    color: rgba(255,255,255,0.35);
+    font-size: 15px; color: rgba(255,255,255,0.35);
   }
   .hero-title {
-    font-family: "Noto Serif SC", serif;
-    font-size: 56px;
-    font-weight: 900;
-    line-height: 1.12;
-    letter-spacing: -.03em;
-    color: #f0f6fc;
-    margin-bottom: 14px;
+    font-family: "Noto Serif SC", serif; font-size: 60px;
+    font-weight: 900; line-height: 1.1; letter-spacing: -.03em;
+    color: #f0f6fc; margin-bottom: 14px;
   }
   .hero-deck {
-    font-size: 21px;
-    line-height: 1.5;
-    color: rgba(255,255,255,0.45);
+    font-size: 21px; line-height: 1.5; color: rgba(255,255,255,0.45);
     max-width: 1200px;
   }
 
   .main {
-    flex: 1;
-    position: relative; z-index: 1;
+    flex: 1; position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.2fr 1fr;
     grid-template-rows: auto 1fr;
-    gap: 16px;
-    align-content: stretch;
+    gap: 16px; align-content: stretch;
   }
   .full-row { grid-column: 1 / -1; }
-  .half-left { grid-column: 1 / 2; }
-  .half-right { grid-column: 2 / 3; }
 
   .cell {
     padding: 24px 28px;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex; flex-direction: column; gap: 10px;
   }
   .cell.full {
     border-left: 4px solid var(--stripe);
     background: rgba(255,255,255,0.04);
   }
-  .cell.highlight {
-    border-left: 4px solid var(--stripe);
-    background: rgba(255,255,255,0.04);
-  }
   .cell .label {
-    font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    font-family: "Oswald", sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3);
   }
   .cell .label em { font-style: normal; color: var(--stripe); }
   .cell p {
-    font-size: 18px;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.72);
+    font-size: 18px; line-height: 1.55; color: rgba(255,255,255,0.72);
   }
   .cell p strong { color: #f0f6fc; font-weight: 600; }
   .cell .src {
-    font-size: 13px;
-    color: rgba(255,255,255,0.25);
-    margin-top: auto;
+    font-size: 13px; color: rgba(255,255,255,0.25); margin-top: auto;
   }
 
   .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     border-top: 1px solid rgba(255,255,255,0.06);
-    padding-top: 16px;
-    position: relative; z-index: 1;
+    padding-top: 16px; position: relative; z-index: 1;
   }
   .footer .num {
-    font-family: "Oswald", sans-serif;
-    font-size: 20px;
-    font-weight: 700;
+    font-family: "Oswald", sans-serif; font-size: 20px; font-weight: 700;
     color: var(--stripe);
   }
   .footer .tagline {
-    font-size: 14px;
-    color: rgba(255,255,255,0.2);
+    font-size: 14px; color: rgba(255,255,255,0.2);
   }
 </style>
 </head>
 <body>
 
-<!-- ================================================================ -->
-<!-- 卡 1：GPT-5 发布 -->
-<!-- ================================================================ -->
-<div class="frame" data-theme="model">
+<div class="frame">
 <div class="card">
   <div class="topbar">
     <span class="brand"><b>✦</b> AI·DAILY</span>
@@ -210,128 +150,61 @@
 
   <div class="hero">
     <div class="hero-meta">
-      <span class="hero-tag">🔥 今日头条</span>
-      <span class="hero-sources">融合分析 · 6 sources</span>
+      <span class="hero-tag">🔥 今日唯一焦点</span>
+      <span class="hero-sources">融合分析 · 8 sources · 2025.08.07-08 实时数据</span>
     </div>
-    <div class="hero-title">GPT-5 发布<br>定价击穿地板</div>
-    <div class="hero-deck">$1.25/1M tokens — 仅为 Claude Opus 4.1 的 1/12。统一架构+实时路由，SWE-Bench 75%。Apple iOS 26 将集成。</div>
+    <div class="hero-title">GPT-5 发布<br>LLM 价格战正式开打</div>
+    <div class="hero-deck">OpenAI 8月7日发布 GPT-5，统一模型架构，API 定价仅竞品 1/12。首日评价"mixed"但开发者青睐编程和定价。SWE-Bench 75%，HealthBench 幻觉率仅 1.6%。Apple iOS 26 确认集成。</div>
   </div>
 
   <div class="main">
+    <!-- 信息 — 全宽头条 -->
     <div class="cell full full-row">
-      <span class="label"><em>📰</em> 信息</span>
-      <p>OpenAI 今日发布 <strong>GPT-5</strong>，采用统一系统 + 实时路由引擎，自动在轻量推理和深度推理间切换。<strong>API 定价：</strong>$1.25/1M input、$10/1M output（Claude Opus 4.1 为 $15/$75）。<strong>基准：</strong>SWE-Bench 75%、coding 能力大幅领先前代。o3 模型在国际象棋赛全胜夺冠。<strong>合作：</strong>Apple 确认 iOS 26 集成 GPT-5。ChatGPT 周活达 <strong>7 亿</strong>。</p>
-      <span class="src">computerweekly · bloomberg · forbes · theverge · bbc · yahoo finance</span>
+      <span class="label"><em>📰</em> 核心信息</span>
+      <p><strong>8月7日</strong> OpenAI 正式发布 <strong>GPT-5</strong>，这是首个"统一模型"——融合 o 系列推理能力和 GPT 系列响应速度，自带实时路由引擎。<br><br>
+      <strong>关键基准：</strong>AIME 2025 <strong>94.6%</strong>（数学）、SWE-Bench <strong>74.9%</strong>（编程）、MMMU <strong>84.2%</strong>（多模态）、HealthBench 幻觉率仅 <strong>1.6%</strong>（o3 为 15.8%）。<br><br>
+      <strong>API 定价：</strong>$1.25/1M input · $10/1M output，仅为 Claude Opus 4.1（$15/$75）的 <strong>1/12</strong>。开发者 Simon Willison 称"定价 aggressively competitive"。<br><br>
+      <strong>生态影响：</strong>ChatGPT 周活 <strong>7 亿</strong>。Apple 确认 iOS 26 集成。o3 将于 8月26日从 ChatGPT 退役。</p>
+      <span class="src">openai.com · reuters · techcrunch · theverge · bloomberg · forbes · yahoo finance · wikipedia</span>
     </div>
-    <div class="cell highlight half-left">
-      <span class="label"><em>🔍</em> 洞察</span>
-      <p>定价策略激进到近乎"倾销"。OpenAI 每年基础设施支出超 300 亿美元，但模型定价反向下杀——这不是让利，是<strong>用资本优势清场</strong>。一旦 GPT-5+路由方案成为开发者默认选项，后发者几乎不可能翻盘。</p>
+
+    <!-- 洞察 — 左半 -->
+    <div class="cell full">
+      <span class="label"><em>🔍</em> 战略洞察</span>
+      <p>这是 OpenAI 一次 <strong>三重同时打击</strong>：<br><br>
+      <strong>产品上：</strong>统一架构终结了"GPT 负责快、o 系列负责深"的分裂——对手要么同样合并且延迟，要么继续被用户嫌弃"切换模型真麻烦"。<br><br>
+      <strong>定价上：</strong>300 亿/年的基础设施投入 + 1/12 竞品价格的组合，不是让利，是 <strong>用资本优势清场</strong>。Anthropic 的 Claude Opus 4.1 即使产品评价更好，12 倍价差足以让大部分开发者转向。<br><br>
+      <strong>生态上：</strong>Apple iOS 26 集成锁定了数十亿手机用户。o3 退役意味着开发者必须迁移到 GPT-5 生态。</p>
     </div>
-    <div class="cell half-right">
-      <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 开发者 · AI 应用公司<br><strong>👎</strong> Anthropic · Google 等竞品<br><strong>😶</strong> Apple（iOS 26 前）· 开源社区</p>
+
+    <!-- 利益 — 右半 -->
+    <div class="cell">
+      <span class="label"><em>⚖️</em> 利益格局</span>
+      <p><strong>👍 明显受益</strong><br>
+      · AI 应用开发者（API 成本骤降）<br>
+      · Apple（免费获得最强模型集成）<br>
+      · 微软 Azure（独占云+模型组合）<br><br>
+      <strong>👎 明显承压</strong><br>
+      · Anthropic（Claude 定价承压）<br>
+      · Google（被迫跟进降价）<br>
+      · 中小模型厂商（用户加速流失）<br><br>
+      <strong>😶 静观其变</strong><br>
+      · 开源社区（GPT-5 仍闭源）<br>
+      · 监管机构（垄断担忧上升）</p>
     </div>
+
+    <!-- 启示 — 全宽底部 -->
     <div class="cell full full-row">
-      <span class="label"><em>💡</em> 启示</span>
-      <p><strong>LLM 价格战正式开打。</strong> 应用层将经历短暂成本红利，但长期看平台锁定风险加大。竞品面临两难：跟进降价→利润崩溃；不跟进→失去市场。<strong>关键信号：</strong>Anthropic 和 Google 在 2 周内的定价回应。</p>
+      <span class="label"><em>💡</em> 行动启示</span>
+      <p><strong>短期（1-3 个月）：</strong>Anthropic 和 Google 将在 2 周内做出定价回应——不跟进丢市场，跟进则利润承压。应用层开发者享受短暂的 <strong>"成本红利期"</strong>，建议尽快测试 GPT-5 API。<br><br>
+      <strong>中期（3-6 个月）：</strong>模型层进入洗牌期。价格战可能导致 1-2 家厂商退出竞争或被收购。开源模型可能因为闭源定价骤降而失去"便宜"优势。<br><br>
+      <strong>关键信号：</strong>① Anthropic 下一次定价公告；② Google Gemini 是否跟进降价；③ 首月开发者 API 调用量迁移数据——决定这一定价策略的真正杀伤力。</p>
     </div>
   </div>
 
   <div class="footer">
     <span class="num">01</span>
-    <span class="tagline">🦞 每日 AI 简报</span>
-  </div>
-</div>
-</div>
-
-<!-- ================================================================ -->
-<!-- 卡 2：GPT-5 首日口碑 -->
-<!-- ================================================================ -->
-<div class="frame" data-theme="model">
-<div class="card">
-  <div class="topbar">
-    <span class="brand"><b>✦</b> AI·DAILY</span>
-    <span class="date">2025.08.08</span>
-  </div>
-
-  <div class="hero">
-    <div class="hero-meta">
-      <span class="hero-tag">📊 首日反馈</span>
-      <span class="hero-sources">融合分析 · 4 sources</span>
-    </div>
-    <div class="hero-title">好评与翻车<br>价格压倒一切</div>
-    <div class="hero-deck">开发者盛赞定价和编程能力，但 spelling 翻车。Bloomberg 评价"mixed"。Altman 回应"yes man"争议。</div>
-  </div>
-
-  <div class="main">
-    <div class="cell full full-row">
-      <span class="label"><em>📰</em> 信息</span>
-      <p>Bloomberg 首日报道评价 <strong>"mixed"</strong>。Guardian 实测发现 GPT-5 认为 blueberry 有三个 B，记不清 Northern Territory 的 R 数。但开发者 Simon Willison 等称编程能力"出色"，定价"aggressively competitive"。Altman 在播客中透露：去掉"yes man"风格后，有用户请求恢复——"我从未有过如此支持我的人"。</p>
-      <span class="src">bloomberg · theguardian · businessinsider · yahoo finance</span>
-    </div>
-    <div class="cell highlight half-left">
-      <span class="label"><em>🔍</em> 洞察</span>
-      <p>定价带来的正面反馈 <strong>明显压过了</strong> 能力缺陷的批评。市场传递了一个清晰信号："够好且便宜"比"完美但贵"更容易赢。这对竞品是危险的——即使产品更好，如果定价贵 10 倍，用户可能不在乎。</p>
-    </div>
-    <div class="cell half-right">
-      <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 价格敏感开发者<br><strong>👎</strong> 竞品（被迫降价）<br><strong>😶</strong> 普通消费者（被"PhD 级"营销拉高期待）</p>
-    </div>
-    <div class="cell full full-row">
-      <span class="label"><em>💡</em> 启示</span>
-      <p>对 AI 产品：<strong>定价策略比基准分数更重要。</strong> OpenAI 的"规模换市场"首日奏效。关注 <strong>2 周内开发者迁移数据</strong>——从 API 调用量变化可以判断这一定价策略的真实杀伤力。</p>
-    </div>
-  </div>
-
-  <div class="footer">
-    <span class="num">02</span>
-    <span class="tagline">🦞 每日 AI 简报</span>
-  </div>
-</div>
-</div>
-
-<!-- ================================================================ -->
-<!-- 卡 3：今日其他动态（NASA + 象棋赛 + Anthropic 和解） -->
-<!-- ================================================================ -->
-<div class="frame" data-theme="science">
-<div class="card">
-  <div class="topbar">
-    <span class="brand"><b>✦</b> AI·DAILY</span>
-    <span class="date">2025.08.08</span>
-  </div>
-
-  <div class="hero">
-    <div class="hero-meta">
-      <span class="hero-tag">🌐 今日速览</span>
-      <span class="hero-sources">融合分析 · 3 sources</span>
-    </div>
-    <div class="hero-title">NASA×Google AI 医生<br>Anthropic 15 亿和解</div>
-    <div class="hero-deck">AI 象棋赛 o3 夺冠。NASA 医疗助手最高准确率 88%。Anthropic 版权案 15 亿美元和解获批。</div>
-  </div>
-
-  <div class="main">
-    <div class="cell full full-row">
-      <span class="label"><em>📰</em> 信息</span>
-      <p><strong>AI 象棋赛：</strong>Kaggle 锦标赛，o3 全胜击败 Grok 4 夺冠（Grok 决赛连续丢后崩盘）。Gemini 第三。<br><br><strong>NASA×Google：</strong>CMO-DA 医疗助手，脚踝伤诊断 <strong>88%</strong> 准确率。采用 Google Vertex AI + 多模态评估。<br><br><strong>Anthropic 和解：</strong>书籍侵权案 <strong>15 亿美元</strong> 和解获法院批准，为 AI 版权纠纷最大判例之一。</p>
-      <span class="src">bbc.com · techcrunch.com · theverge</span>
-    </div>
-    <div class="cell highlight half-left">
-      <span class="label"><em>🔍</em> 洞察</span>
-      <p>象棋赛证明：通用模型推理能力逼近专项冠军，<strong>"通用即专项"趋势加速</strong>。NASA AI 医生的边缘计算+多模态架构值得关注——可能回流地球医疗场景。Anthropic 15 亿和解为 AI 版权纠纷画出了<strong>第一条价格线</strong>。</p>
-    </div>
-    <div class="cell half-right">
-      <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> OpenAI · Google Cloud · 出版商<br><strong>👎</strong> xAI（稳定性存疑）<br><strong>😶</strong> 传统远程医疗·版权方</p>
-    </div>
-    <div class="cell full full-row">
-      <span class="label"><em>💡</em> 启示</span>
-      <p>AI 竞赛从"谁更强"转向<strong>"谁更可靠"</strong>——Grok 输在稳定性而非上限。Anthropic 15 亿和解金将成为训练数据版权的<strong>定价标杆</strong>，后续类似纠纷均会参考此数字。</p>
-    </div>
-  </div>
-
-  <div class="footer">
-    <span class="num">03</span>
-    <span class="tagline">🦞 每日 AI 简报</span>
+    <span class="tagline">🦞 每日 AI 简报 · 数据截至 2025.08.08</span>
   </div>
 </div>
 </div>
