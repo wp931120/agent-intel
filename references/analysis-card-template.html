@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦞 每日 AI 简报 · 参考卡片</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #f0f2f5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 40px;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+  }
+
+  /* 3:4 卡片 — 1080×1440px 比例，实际渲染按需缩放 */
+  .card {
+    width: 360px;
+    height: 480px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-header {
+    padding: 20px 24px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-tag {
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 40px;
+  }
+  .card-date {
+    font-size: 11px;
+    color: #999;
+  }
+
+  .card-body {
+    flex: 1;
+    padding: 0 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-section {
+    background: #f8f9fb;
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .card-section h3 {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+  }
+  .card-section p {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .card-footer {
+    padding: 12px 24px 16px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: #aaa;
+  }
+  .card-source {
+    color: #1a73e8;
+    font-weight: 500;
+  }
+
+  /* 颜色主题 */
+  .card.model-release .card-tag { background: #e3f2fd; color: #1565c0; }
+  .card.model-release .card-section h3 { color: #1565c0; }
+
+  .card.policy .card-tag { background: #fce4ec; color: #c62828; }
+  .card.policy .card-section h3 { color: #c62828; }
+
+  .card.funding .card-tag { background: #fff3e0; color: #e65100; }
+  .card.funding .card-section h3 { color: #e65100; }
+
+  .card.research .card-tag { background: #f3e5f5; color: #6a1b9a; }
+  .card.research .card-section h3 { color: #6a1b9a; }
+</style>
+</head>
+<body>
+
+<!-- ============ 示例卡片 1：模型发布 ============ -->
+<div class="card model-release">
+  <div class="card-header">
+    <span class="card-tag">🤖 模型发布</span>
+    <span class="card-date">2025-08-08</span>
+  </div>
+  <div class="card-body">
+    <div class="card-section">
+      <h3>📰 信息</h3>
+      <p>Anthropic 发布 Claude Sonnet 4，推理速度比 Sonnet 3 提升 40%，上下文窗口扩展至 500K token，API 价格不变。</p>
+    </div>
+    <div class="card-section">
+      <h3>🔍 洞察</h3>
+      <p>强调"速度不降价"而非"能力颠覆"，说明 Anthropic 的策略是抢用量场景（编程助手、客服等），而不是跟 GPT-5 拼天花板。</p>
+    </div>
+    <div class="card-section">
+      <h3>⚖️ 利益</h3>
+      <p>👍 开发者创业团队（更低成本跑复杂任务）· AI 应用层公司<br>👎 GPT-5 尚未发布的空窗期竞品 · 中小模型厂商（被性价比挤压）</p>
+    </div>
+    <div class="card-section">
+      <h3>💡 启示</h3>
+      <p>短期：各平台 API 价格战进一步加剧。中期：100K+ token 会成为模型标配。关注 GPT-5 如何回应。</p>
+    </div>
+  </div>
+  <div class="card-footer">
+    <span>🦞 每日 AI 简报</span>
+    <span class="card-source">anthropic.com</span>
+  </div>
+</div>
+
+<!-- ============ 示例卡片 2：政策监管 ============ -->
+<div class="card policy">
+  <div class="card-header">
+    <span class="card-tag">📋 政策监管</span>
+    <span class="card-date">2025-08-07</span>
+  </div>
+  <div class="card-body">
+    <div class="card-section">
+      <h3>📰 信息</h3>
+      <p>欧盟 AI 法案通过最新修正案，要求所有商用大模型披露训练数据来源和版权合规证明，2026 Q1 生效。</p>
+    </div>
+    <div class="card-section">
+      <h3>🔍 洞察</h3>
+      <p>没提"禁止"而是"披露"，让步于行业压力。但"训练数据溯源"技术难度极高，实质门槛比禁令更高。</p>
+    </div>
+    <div class="card-section">
+      <h3>⚖️ 利益</h3>
+      <p>👍 拥有自有数据的厂商（如 Meta、微软）· 数据标注/溯源创业公司<br>👎 依赖公开数据集爬取的创业团队 · 中国出海模型厂商（合规成本加倍）</p>
+    </div>
+    <div class="card-section">
+      <h3>💡 启示</h3>
+      <p>9 个月内需要建立数据溯源体系。训练数据管理将成为新的合规赛道。中国企业出海 EU 需提前布局。</p>
+    </div>
+  </div>
+  <div class="card-footer">
+    <span>🦞 每日 AI 简报</span>
+    <span class="card-source">europa.eu</span>
+  </div>
+</div>
+
+<!-- ============ 示例卡片 3：融资动态 ============ -->
+<div class="card funding">
+  <div class="card-header">
+    <span class="card-tag">💰 融资动态</span>
+    <span class="card-date">2025-08-06</span>
+  </div>
+  <div class="card-body">
+    <div class="card-section">
+      <h3>📰 信息</h3>
+      <p>AI 编程助手 Cursor 完成 2.5 亿美元 C 轮融资，估值 120 亿美元。A16Z 领投，现有投资者跟投。</p>
+    </div>
+    <div class="card-section">
+      <h3>🔍 洞察</h3>
+      <p>AI 编程赛道估值飙升速度超过模型层。说明资本判断"应用层收割"窗口已开，基础设施红利正在向工具层转移。</p>
+    </div>
+    <div class="card-section">
+      <h3>⚖️ 利益</h3>
+      <p>👍 Cursor · A16Z · 同赛道竞品（Devin、Codeium）估值水涨船高<br>👎 传统 IDE 厂商（VS Code 生态被分食）· 外包编程服务</p>
+    </div>
+    <div class="card-section">
+      <h3>💡 启示</h3>
+      <p>AI 应用层投资进入"大额+高估值"阶段。关注下一波被重估的工具赛道：设计工具（Figma 替代）、数据分析（Excel 替代）。</p>
+    </div>
+  </div>
+  <div class="card-footer">
+    <span>🦞 每日 AI 简报</span>
+    <span class="card-source">techcrunch.com</span>
+  </div>
+</div>
+
+<!-- ============ 示例卡片 4：论文突破 ============ -->
+<div class="card research">
+  <div class="card-header">
+    <span class="card-tag">📄 论文突破</span>
+    <span class="card-date">2025-08-05</span>
+  </div>
+  <div class="card-body">
+    <div class="card-section">
+      <h3>📰 信息</h3>
+      <p>Google DeepMind 发布 AlphaGeometry 2，在国际数学奥林匹克（IMO）中达到金牌水平，解题速度较初代提升 10 倍。</p>
+    </div>
+    <div class="card-section">
+      <h3>🔍 洞察</h3>
+      <p>IMO 金牌是符号推理能力的金标准。AlphaGeometry 2 用神经符号混合架构而非纯 LLM，这条路可能比"更大模型"更高效。</p>
+    </div>
+    <div class="card-section">
+      <h3>⚖️ 利益</h3>
+      <p>👍 Google（在推理赛道建立壁垒）· 数学/科学教育领域<br>👎 OpenAI o 系列推理模型（不同路线竞争）· 纯 LLM 派研究者</p>
+    </div>
+    <div class="card-section">
+      <h3>💡 启示</h3>
+      <p>神经符号混合路线获得里程碑验证。关注这种架构在代码生成、定理证明等场景的商业化落地。对教育科技是长期利好。</p>
+    </div>
+  </div>
+  <div class="card-footer">
+    <span>🦞 每日 AI 简报</span>
+    <span class="card-source">deepmind.google</span>
+  </div>
+</div>
+
+</body>
+</html>

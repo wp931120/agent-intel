@@ -1,122 +1,119 @@
 ---
 name: agent-intel
-description: AI 知识收集与深度分析专家。使用 AnySearch API 检索信息，再通过四步分析方法论洞察信息，最终输出 3:4 竖版信息卡片。支持 Skill/MCP/API 三种接入方式。适用于行业洞察、新闻分析、技术调研、竞品研究等场景。
+description: 每日 AI 简报生成器。使用 AnySearch API 检索 AI 领域最新动态，通过四维分析（信息·洞察·利益·启示）输出 3:4 竖版 HTML 信息卡片。适合每日早报、行业快讯、投研分析等场景。支持 Skill/MCP/API 三种接入方式。
 ---
 
-# 🦞 Agent Intel — 知识收集 + 深度分析
+# 🦞 每日 AI 简报生成器
 
-基于 [AnySearch API](https://www.anysearch.com) 的知识收集与洞察技能。不只要"搜到"，更要"读懂"。
+基于 [AnySearch API](https://www.anysearch.com) 的每日 AI 动态采集与分析工具。每天早上跑一轮，产出可传播的 HTML 信息卡片。
 
-## 完整工作流
+## 工作流
 
 ```
-用户主题 → 拆解检索词 → AnySearch 检索 → 四步分析 → 输出信息卡片
+选题 → 拆检索词 → AnySearch 检索 → 四维分析 → 生成 HTML 卡片
 ```
 
 ---
 
-## Step 1 — 拆解检索词
+## Step 1 — 选题
 
-收到用户主题后，拆成 2-3 个精准检索词。例如"最近 RAG 有什么新动态"：
+每日自动扫描 AI 领域热点，或由用户指定主题。典型选题方向：
 
-- `RAG 检索增强生成 2025 最新进展`
-- `RAG knowledge base production 2025`
-- `RAG evaluation benchmark 2025`
+- 大模型发布/更新（GPT、Claude、Llama、Gemini 等）
+- AI 框架/工具新版本（LangChain、CrewAI、AutoGPT 等）
+- 融资与公司动态
+- 论文突破
+- 政策与监管变动
 
-## Step 2 — 检索
+## Step 2 — 拆解检索词
+
+每个选题拆成 2-3 个精准检索词。例如"Claude 新功能"：
+
+- `Claude Anthropic new features 2025`
+- `Claude API update latest`
+- `Claude vs GPT benchmark 2025`
+
+## Step 3 — 检索
 
 ```bash
-# 普通模式 — 打印可读结果
-bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
-
-# JSON 模式 — 输出原始 JSON（供 Agent 程序化处理）
+# JSON 模式 — 输出原始 JSON 供分析
 bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag] json
+
+# 普通模式 — 直接看结果
+bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
 ```
 
-返回的 JSON 中每条结果包含：`title`, `url`, `snippet`, `content`。
+## Step 4 — 四维分析
 
-## Step 3 — 四步分析
+对每条信息按四个维度拆解：
 
-对检索到的信息，按以下四步逐条分析，合并交叉验证。表达方式参考 [analysis-card-template.md](references/analysis-card-template.md)。
+### 📰 信息
+**事实层面：谁、什么、何时、何地、多少**
+- 发生了什么？信源是谁？
+- 关键数据/数字是什么？
+- 替代了之前的什么认知？
 
-### ① 什么来头
+### 🔍 洞察
+**信号层面：话里有话、趋势判断**
+- 措辞背后是什么意图？
+- 这反映了什么趋势？
+- 跟近期其他事件有什么关系？
 
-先判断新闻类型：宏观类·行业类·突发类·舆论类。
+### ⚖️ 利益
+**格局层面：谁受益、谁承压**
+- 直接受益方/受损方是谁？
+- 产业链上下游谁被波及？
+- 谁在沉默、谁在观望？
 
-**两个问题翻到底：**
-- 这条消息出来之前大家以为是什么？
-- 如果没有它，现在会是什么情况？
+### 💡 启示
+**行动层面：然后呢、对我意味着什么**
+- 接下来会发生什么？
+- 短期（1-3月）/中期（半年-1年）影响
+- 我需要关注什么信号？
 
-> 比如：OpenAI 发了一个新模型。之前以为要半年后才出，那提前发就是抢市场的信号。
+## Step 5 — 生成 HTML 卡片
 
-### ② 话里有话
+每条分析输出一张 3:4 竖版 HTML 卡片（参考 `references/analysis-card-template.html`）。
 
-**谁在说、说给谁听：**
-- 信源：官方·媒体·匿名爆料
-- 受众：大众·开发者·投资人
+### 卡片模板
 
-**抠字眼：**
-- `"适时"` vs `"尽快"`，`"探索"` vs `"启动"`，`"部分"` vs `"全面"`
-- 说了什么重要，**没说什么**更重要
-
-### ③ 谁赢谁输
-
-| | 得利的 | 吃亏的 | 装死的 |
-|--|--------|--------|--------|
-| 明面 | 被表扬的 | 被点名的 | 没被提的竞品 |
-| 暗面 | 上下游配套 | 替代方案 | 还在观望的 |
-
-官方口径 ≠ 真实意图。看被点名的人接下来干嘛。
-
-### ④ 然后呢
-
-``` 
-这事发生了 → 市场/监管/大众会怎么反应 → 再下一步会怎样
+```html
+<!-- 每张卡片尺寸：3:4 比例，1080×1440px -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-tag">简报类型</span>
+  </div>
+  <div class="card-section">
+    <h3>📰 信息</h3>
+    <p>事实层内容...</p>
+  </div>
+  <div class="card-section">
+    <h3>🔍 洞察</h3>
+    <p>信号层分析...</p>
+  </div>
+  <div class="card-section">
+    <h3>⚖️ 利益</h3>
+    <p>格局层判断...</p>
+  </div>
+  <div class="card-section">
+    <h3>💡 启示</h3>
+    <p>行动层建议...</p>
+  </div>
+  <div class="card-footer">
+    <span>🦞 每日 AI 简报 · YYYY-MM-DD</span>
+    <span class="card-source">来源</span>
+  </div>
+</div>
 ```
 
-**落地：** 对我（投资/工作/判断）意味着什么？
+### 多卡片简报
 
-- 短期（1-3 个月）
-- 中期（半年到一年）
-- 需要盯什么信号
+一个选题可能生成多张卡片：
 
----
+- **主卡**：该选题的核心事件
+- **副卡**：相关延展（如技术细节、竞品反应、历史对比）
 
-## Step 4 — 输出信息卡片
-
-结果以 3:4 竖版信息卡片呈现，格式如下：
-
-```
-┌──────────────┐
-│  🦞 小龙虾分析  │
-│  📅 2025-XX-XX  │
-├──────────────┤
-│              │
-│  📌 关键洞察    │
-│  （一句话定论）  │
-│              │
-│  🔍 定位        │
-│  [类型 + 替代了什么] │
-│              │
-│  💬 文本信号     │
-│  · 谁说的 / 对谁说 │
-│  · 关键用词      │
-│              │
-│  🏢 利益相关方    │
-│  受益：...      │
-│  承压：...      │
-│              │
-│  💡 启示        │
-│  二阶：...      │
-│  对我：...      │
-│              │
-│  📎 来源：[链接]  │
-└──────────────┘
-```
-
-### 多卡片的处理
-
-如果同一个主题搜到多个方向的信息（如技术进展 + 公司动态 + 论文），分别出卡，每个卡片聚焦一个子话题。
+最终生成一份完整的 HTML 简报页面，包含所有卡片。
 
 ---
 
@@ -151,9 +148,7 @@ bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
 
 ## 参考模板
 
-信息卡片输出格式参考：[analysis-card-template.md](references/analysis-card-template.md)
-
-模板包含两份示例（Meta Llama 4 / 中国大模型备案新规），每次生成卡片时以此为准。
+卡片 HTML 结构参考：[analysis-card-template.html](references/analysis-card-template.html)
 
 ## API 参考
 
@@ -171,11 +166,8 @@ bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
 # 1. 设置 API Key
 export ANYSEARCH_API_KEY="as_sk_xxxxxx"
 
-# 2. 搜索（可读模式）
-bash scripts/agent-search.sh "RAG 知识库构建 2025" 10 zh-CN
+# 2. 检索
+bash scripts/agent-search.sh "Claude Sonnet 4 features" 10 en general.general json
 
-# 3. 搜索（JSON 模式，供 Agent 后续分析）
-bash scripts/agent-search.sh "LangChain vs LangGraph" 15 en code.doc json
-
-# 4. 免费注册获取 API Key：https://www.anysearch.com
+# 3. 免费注册获取 API Key：https://www.anysearch.com
 ```

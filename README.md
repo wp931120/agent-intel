@@ -1,12 +1,12 @@
-# 🦞 Agent Intel — 知识收集 + 深度分析
+# 🦞 每日 AI 简报生成器
 
 <p align="center">
   <img src="assets/logo.svg" width="600" height="225" alt="Agent Intel Logo">
 </p>
 
 <p align="center">
-  <b>基于 AnySearch API 的 AI 知识收集与深度分析工具</b><br>
-  检索 → 四步分析 → 3:4 信息卡片
+  <b>基于 AnySearch API 的每日 AI 动态采集与 HTML 简报生成工具</b><br>
+  检索 → 四维分析（信息·洞察·利益·启示）→ 3:4 HTML 卡片
 </p>
 
 <p align="center">
@@ -17,49 +17,52 @@
 
 ---
 
-不只要"搜到"，更要"读懂"。用五步工作流把碎片信息变成可用的深度洞察。
+每日 AI 简报生成器。每天早上跑一轮，产出可传播的 HTML 信息卡片。
 
 ## 工作流
 
 ```
-用户主题 → 拆解检索词 → AnySearch 检索 → 四步分析 → 输出信息卡片
+选题 → 拆检索词 → AnySearch 检索 → 四维分析 → 生成 HTML 卡片
 ```
 
-### Step 1 — 拆解检索词
+### Step 1 — 选题
 
-收到一个主题后，拆成多个精准检索词。例如"RAG 最新进展"：
+每日扫描 AI 热点，或指定主题。方向：模型发布、工具更新、融资动态、论文突破、政策监管。
 
-- `RAG 检索增强生成 2025 最新进展`
-- `RAG knowledge base production 2025`
-- `RAG evaluation benchmark 2025`
+### Step 2 — 拆检索词
 
-### Step 2 — 检索
+每个选题拆成 2-3 个检索词。例如"Claude 新功能"：
+
+- `Claude Anthropic new features 2025`
+- `Claude API update latest`
+- `Claude vs GPT benchmark 2025`
+
+### Step 3 — 检索
 
 ```bash
-# 可读输出
-bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
-
-# JSON 输出（供程序化分析）
+# JSON 模式（供分析）
 bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag] json
+
+# 可读模式
+bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
 ```
 
-### Step 3 — 四步分析
+### Step 4 — 四维分析
 
-对检索结果逐条分析，合并交叉验证：
+每条信息按四个维度拆解：
 
-**① 什么来头** — 判断类型，问两个问题：出来前大家以为是什么？没有它会怎样？
+| 维度 | 问什么 |
+|------|--------|
+| 📰 信息 | 发生了什么？谁说的？关键数据？ |
+| 🔍 洞察 | 话里有话？反映什么趋势？ |
+| ⚖️ 利益 | 谁受益？谁承压？谁观望？ |
+| 💡 启示 | 接下来怎样？对我意味着什么？ |
 
-**② 话里有话** — 谁说的、对谁说、用了什么词、没说什么
+### Step 5 — 生成 HTML 卡片
 
-**③ 谁赢谁输** — 谁得利、谁吃亏、谁装死
+每条分析生成一张 3:4 竖版 HTML 卡片。样式参考 `references/analysis-card-template.html`。
 
-**④ 然后呢** — 这事发生了→大家会怎么反应→再下一步→对我意味着什么
-
-### Step 4 — 输出信息卡片
-
-3:4 竖版卡片，聚焦一个子话题，包含：关键洞察、定位、文本信号、利益相关方、启示、来源。
-
-多个方向的信息分别出卡。
+一个选题可生成多张卡片（主卡+副卡），最终输出完整 HTML 简报页。
 
 ## 快速开始
 
@@ -71,11 +74,11 @@ cd agent-intel
 # 2. 设置 API Key
 export ANYSEARCH_API_KEY="as_sk_xxxxxx"
 
-# 3. 搜索
-bash scripts/agent-search.sh "RAG 知识库构建" 10 zh-CN
+# 3. 检索（JSON 模式方便分析）
+bash scripts/agent-search.sh "Claude Sonnet 4 features" 10 en general.general json
 
-# 4. JSON 模式（供分析）
-bash scripts/agent-search.sh "RAG 知识库构建" 10 zh-CN general.general json
+# 4. 查看卡片模板参考
+open references/analysis-card-template.html
 ```
 
 > 💡 免费注册获取 API Key：[AnySearch Console](https://www.anysearch.com)
@@ -107,48 +110,18 @@ bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
 
 完整 tags：[tags.md](references/tags.md)
 
-## 实战场景
-
-### 行业知识采集
-
-```bash
-bash scripts/agent-search.sh "大模型应用落地 2025" 15 zh-CN
-bash scripts/agent-search.sh "autonomous agent production deployment" 15 en
-bash scripts/agent-search.sh "Agentic RAG pipeline" 10 en code.doc
-```
-
-### 论文追踪
-
-```bash
-bash scripts/agent-search.sh "tool learning LLM planning" 20 en academic.search
-```
-
-### 竞品动态
-
-```bash
-bash scripts/agent-search.sh "Notion AI knowledge base competitor" 10 en
-bash scripts/agent-search.sh "个人知识管理工具 对比" 10 zh-CN finance.news
-```
-
-## OpenClaw Skill
-
-安装后对话中直接触发：
-
-```bash
-openclaw skills install agent-intel --file agent-intel.skill
-```
-
 ## 目录结构
 
 ```
 agent-intel/
-├── SKILL.md                    # OpenClaw Skill 主文件（含完整工作流与方法论）
+├── SKILL.md                              # OpenClaw Skill 主文件
 ├── scripts/
-│   └── agent-search.sh         # AnySearch 搜索封装
+│   └── agent-search.sh                   # AnySearch 搜索封装
 ├── references/
-│   └── tags.md                 # AnySearch Tags 参考
+│   ├── tags.md                           # AnySearch Tags 参考
+│   └── analysis-card-template.html       # HTML 卡片参考模板
 ├── assets/
-│   └── logo.svg                # Logo
+│   └── logo.svg                          # Logo
 ├── CHANGELOG.md
 ├── README.md
 └── .gitignore
