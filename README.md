@@ -1,91 +1,110 @@
-# 🦞 每日 Agent 简报
+# 🦞 小龙虾 — AI 知识收集工作流
 
-<p align="center">
-  <img src="assets/logo.svg" width="600" height="225" alt="Agent Intel Logo">
-</p>
-
-<p align="center">
-  <b>面向 AI Agent 从业者和学习者的每日简报工具</b><br>
-  检索 → 四维分析（信息/洞察/利益/启示）→ 3:4 HTML 卡片（含 SVG 图形）
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License MIT">
-  <img src="https://img.shields.io/badge/AnySearch-API-00d4ff" alt="AnySearch API">
-  <img src="https://img.shields.io/badge/OpenClaw-Skill-7c3aed" alt="OpenClaw Skill">
-</p>
+不要收藏链接，要消化信息。
+每天自动跑一套流程，让 AI 帮你建一个活的私人知识库。
 
 ---
 
-每日 AI 简报生成器。搜到信息后按四维拆解，输出可传播的 3:4 HTML 卡片。支持单事件和融合分析两种模式。
+做 AI 博主最折磨人的不是写，是找素材。
 
-## 工作流
+搜出来的全是广告，点进去一半是重复的旧闻，好不容易攒点东西，散落在收藏夹、截图、备忘录里，根本形不成沉淀。更别说每次喂给 AI 还要浪费大把 Token 去处理这些垃圾信息。
+
+后来我干脆自己搭了一套 **小龙虾 + AnySearch** 自动化收集工作流，现在每天醒来，素材已经躺在本地库里了。
+
+## 🦞 核心链路（照着抄就行）
 
 ```
-选题 → 拆检索词 → AnySearch 检索 → 四维分析 → 生成 HTML 卡片
+输入主题 → 拆解检索词 → AnySearch 检索 → 信息提纯去重 → 生成结构化文档 → 本地知识库归档
 ```
 
-### Step 1 — 选题
+这套流程之所以丝滑，是因为 AnySearch 解决了几个致命痛点：
 
-每日扫描 AI 热点，或指定主题。方向：模型发布、工具更新、融资动态、论文突破、政策监管。
+**✅ 纯净输出**
+直接过滤广告和同源重复内容，吐出来的就是干净的 Markdown，拿来就能用。
 
-### Step 2 — 拆检索词
+**✅ 垂直精准**
+支持通用、学术、代码、金融等多领域检索，不是泛泛的爬虫。
 
-每个选题拆成 2-3 个检索词。例如"Claude 新功能"：
+**✅ 接入自由**
+不管你是用 Skill、MCP 还是直接调 API，都能无缝嵌进你的 Agent 里。
 
-- `Claude Anthropic new features 2025`
-- `Claude API update latest`
-- `Claude vs GPT benchmark 2025`
+**✅ 免费额度足**
+学生和开发者认证后，每天有 2000 次免费调用，日常搜集完全够造。
 
-### Step 3 — 检索
+## 🆚 实测对比
 
+以前用普通搜索：搜 10 个词，5 个是广告，3 个重复，剩下 2 个还得手动洗稿。
+
+现在用小龙虾 + AnySearch：AI 自己跑检索、自己去重、自己归档，产出的素材直接就是一篇笔记的初稿。
+
+## 🛠️ 3 步上手搭建
+
+**第 1 步：部署小龙虾**
 ```bash
-# JSON 模式（供分析）
-bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag] json
-
-# 可读模式
-bash scripts/agent-search.sh "<检索词>" <条数> <语言> [tag]
-```
-
-### Step 4 — 四维分析
-
-| 维度 | 问什么 |
-|------|--------|
-| 📰 信息 | 发生了什么？谁说的？关键数字？ |
-| 🔍 洞察 | 话里有话？反映什么趋势？ |
-| ⚖️ 利益 | 谁受益？谁承压？谁观望？ |
-| 💡 启示 | 然后呢？对我意味着什么？ |
-
-**两种模式：**
-- **单事件** — 一条消息独立出卡
-- **融合分析** — 多来源合并到一张卡，每项标注来源
-
-### Step 5 — 生成 HTML 卡片
-
-3:4 竖版，主次布局（35% 主区 + 65% 次区）。参考模板：[analysis-card-template.html](references/analysis-card-template.html)
-
-**主题色系统：** 蓝（模型）/ 红（政策）/ 橙（融资）/ 紫（论文）/ 青（行业整合）
-
-## 快速开始
-
-```bash
-# 1. 克隆
-git clone https://github.com/wp931120/agent-intel.git
+git clone https://github.com/wp931120/agent-intel
 cd agent-intel
-
-# 2. 设置 API Key
-export ANYSEARCH_API_KEY="as_sk_xxxxxx"
-
-# 3. 检索
-bash scripts/agent-search.sh "Claude Sonnet 4 features" 10 en general.general json
-
-# 4. 查看卡片模板
-open references/analysis-card-template.html
 ```
 
-> 💡 免费注册获取 API Key：[AnySearch Console](https://www.anysearch.com)
+**第 2 步：接入 AnySearch**
+在配置里选 Skill 或 MCP 模式，填入检索技能。
+```bash
+export ANYSEARCH_API_KEY="as_sk_xxxxxx"
+```
 
-## 脚本参数
+**第 3 步：领 Key 跑起来**
+去 [anysearch.com](https://www.anysearch.com) 注册账号，领 API Key，配置好你关心的知识收集规则，启动。
+
+```bash
+bash scripts/agent-search.sh "RAG 知识库构建 2026" 10 zh-CN
+```
+
+现在你的知识库不再是"垃圾堆"，而是每天自动更新的"弹药库"。
+
+## 📂 目录结构
+
+```
+agent-intel/
+├── SKILL.md                    # OpenClaw Skill 主文件
+├── scripts/
+│   └── agent-search.sh         # AnySearch 搜索封装脚本
+├── references/
+│   ├── tags.md                 # AnySearch Tags 参考
+│   └── analysis-card-template.html  # 3:4 信息卡片模板
+├── examples/                   # 每日简报存档
+│   └── ai-daily-brief-2026-08-08.html
+├── knowledge-base/             # 本地知识库（自动归档）
+│   ├── topics/
+│   │   ├── rag/
+│   │   ├── multi-agent/
+│   │   └── llm-ops/
+│   ├── papers/
+│   ├── tools/
+│   └── daily/
+└── README.md
+```
+
+## 实战：每日 Agent 简报
+
+每天用这个 skill 跑三个方向：
+
+| 方向 | 标签 | 产出 |
+|------|------|------|
+| 🔵 模型更新 | ⭐ 必出 | 深度分析卡片 |
+| 🟢 开源项目 | ⭐ 必出 | 技术亮点卡片 |
+| 🟣 论文突破 | ⭐ 必出 | 可用性判断卡片 |
+
+每张卡片格式固定：
+
+```
+📰 信息 — 发生了什么，数字是多少
+🔍 洞察 — 话里有话，对 Agent 开发者意味着什么
+⚖️ 利益 — 哪些框架/工具/模式变了
+💡 启示 — 这周做什么、关注什么信号
+```
+
+卡片自动归档到 `knowledge-base/` 目录，日积月累。
+
+## 参数说明
 
 ```bash
 bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
@@ -93,48 +112,34 @@ bash scripts/agent-search.sh "<query>" [max_results] [language] [tag] [mode]
 
 | 参数 | 说明 | 默认值 |
 |------|------|--------|
-| `query` (必填) | 搜索查询 | — |
-| `max_results` | 返回结果数 (1-20) | 10 |
+| `query`（必填） | 搜索查询 | — |
+| `max_results` | 1-20 条 | 10 |
 | `language` | `en` / `zh-CN` | `en` |
 | `tag` | 能力标签 | `general.general` |
-| `mode` | 输出模式：`normal` / `json` | `normal` |
+| `mode` | `normal` / `json` | `normal` |
 
-### Tag 选择指南
+### Tags 选择
 
 | Tag | 适合场景 |
 |-----|---------|
-| `general.general` | 通用新闻资讯 |
+| `general.general` | 通用资讯 |
 | `code.doc` | 技术文档、API 参考 |
-| `academic.search` | 学术论文检索 |
-| `code.snippet` | 开源代码搜索 |
+| `academic.search` | 学术论文 |
+| `code.snippet` | 开源代码 |
 | `finance.news` | 公司动态、融资 |
-| `social_media.social_media` | 社区讨论热度 |
+| `social_media.social_media` | 社区讨论 |
 
-完整 tags：[tags.md](references/tags.md)
-
-## 目录结构
-
-```
-agent-intel/
-├── SKILL.md                              # OpenClaw Skill 主文件
-├── scripts/
-│   └── agent-search.sh                   # AnySearch 搜索封装
-├── references/
-│   ├── tags.md                           # AnySearch Tags 参考
-│   └── analysis-card-template.html       # HTML 卡片参考模板
-├── assets/
-│   └── logo.svg                          # Logo
-├── CHANGELOG.md
-├── README.md
-└── .gitignore
-```
+完整 tags：[references/tags.md](references/tags.md)
 
 ## 依赖
 
 - `curl` — HTTP 请求
 - `python3` — JSON 解析
-- `jq` (可选) — JSON 构建
+- `jq`（可选）— JSON 构建
 
 ## 许可证
 
 MIT
+
+📁 [github.com/wp931120/agent-intel](https://github.com/wp931120/agent-intel)
+🔑 [anysearch.com](https://www.anysearch.com)
