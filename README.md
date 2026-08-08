@@ -1,5 +1,9 @@
 # 🦞 小龙虾 — AI 知识收集工作流
 
+<p align="center">
+  <img src="assets/logo.svg" width="600" height="225" alt="小龙虾 logo">
+</p>
+
 不要收藏链接，要消化信息。
 每天自动跑一套流程，让 AI 帮你建一个活的私人知识库。
 
