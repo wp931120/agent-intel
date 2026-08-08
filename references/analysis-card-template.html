@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🦞 每日 AI 简报 · 参考卡片</title>
+<title>🦞 每日 Agent 简报 · 参考卡片</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Oswald:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +37,6 @@
     overflow: hidden;
   }
 
-  /* 网格 */
   .card::before {
     content: ''; position: absolute; inset: 0;
     pointer-events: none; opacity: .035;
@@ -47,7 +46,6 @@
     background-size: 32px 32px;
   }
 
-  /* 品牌水印 SVG */
   .watermark {
     position: absolute;
     right: 30px; bottom: 80px;
@@ -56,13 +54,12 @@
     z-index: 0;
   }
 
-  .frame[data-theme="model"]    { --stripe: #58a6ff; --bg-glow: rgba(88,166,255,0.05); }
-  .frame[data-theme="agent"]    { --stripe: #3fb950; --bg-glow: rgba(63,185,80,0.05); }
-  .frame[data-theme="tool"]     { --stripe: #d29922; --bg-glow: rgba(210,153,34,0.05); }
-  .frame[data-theme="research"] { --stripe: #bc8cff; --bg-glow: rgba(188,140,255,0.05); }
-  .frame[data-theme="safety"]   { --stripe: #f85149; --bg-glow: rgba(248,81,73,0.05); }
+  .frame[data-theme="model"]    { --stripe: #58a6ff; }
+  .frame[data-theme="opensource"] { --stripe: #3fb950; }
+  .frame[data-theme="paper"]    { --stripe: #bc8cff; }
+  .frame[data-theme="safety"]   { --stripe: #f85149; }
+  .frame[data-theme="tool"]     { --stripe: #d29922; }
 
-  /* 顶部装饰渐变条 */
   .accent-bar {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -97,10 +94,7 @@
     align-items: end;
   }
   .hero-left { min-width: 0; }
-  .hero-right {
-    align-self: center;
-    opacity: .6;
-  }
+  .hero-right { align-self: center; opacity: .6; }
   .hero-meta {
     display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   }
@@ -118,7 +112,7 @@
   }
   .hero-title {
     font-family: "Noto Serif SC", serif;
-    font-size: 58px; font-weight: 900;
+    font-size: 56px; font-weight: 900;
     line-height: 1.1; letter-spacing: -.03em;
     color: #f0f6fc;
     margin-bottom: 10px;
@@ -186,22 +180,15 @@
 <body>
 
 <!-- ================================================================ -->
-<!-- 卡1：GPT-5 对 Agent 开发者意味着什么（聚焦 Agent 从业者） -->
+<!-- 卡1：⭐ 模型更新 — GPT-5 发布 -->
 <!-- ================================================================ -->
-<div class="frame" data-theme="agent">
+<div class="frame" data-theme="model">
 <div class="card">
   <div class="accent-bar"></div>
-
-  <!-- SVG 水印 -->
   <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
     <circle cx="80" cy="80" r="75" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
-    <circle cx="80" cy="80" r="55" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
-    <circle cx="80" cy="80" r="35" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
-    <path d="M80 5 L82 35 L80 40 L78 35 Z" fill="currentColor" opacity="0.2"/>
-    <path d="M80 120 L82 150 L80 155 L78 150 Z" fill="currentColor" opacity="0.15"/>
-    <path d="M5 80 L35 78 L40 80 L35 82 Z" fill="currentColor" opacity="0.2"/>
-    <path d="M120 80 L150 78 L155 80 L150 82 Z" fill="currentColor" opacity="0.15"/>
-    <circle cx="80" cy="80" r="4" fill="currentColor" opacity="0.25"/>
+    <circle cx="80" cy="80" r="40" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+    <path d="M80 5 L83 40 L80 45 L77 40 Z" fill="currentColor" opacity="0.2"/>
   </svg>
 
   <div class="topbar">
@@ -212,80 +199,71 @@
   <div class="hero">
     <div class="hero-left">
       <div class="hero-meta">
-        <span class="hero-tag">🧩 Agent 生态</span>
-        <span class="hero-sources">融合分析 · 8 sources</span>
+        <span class="hero-tag">⭐ 模型更新</span>
+        <span class="hero-sources">openai · reuters · techcrunch · 8 sources</span>
       </div>
-      <div class="hero-title">GPT-5 意味着<br>Agent 开发范式要变</div>
-      <div class="hero-deck">统一路由 + 编程基准大幅提升 + API 降到 1/12 价格。Agent 开发者的技术栈选型和工作方式正在被重新定义。</div>
+      <div class="hero-title">GPT-5 发布<br>Agent 开发范式要变</div>
+      <div class="hero-deck">统一路由+深度推理融合，SWE-Bench 74.9%，API 降至竞品 1/12。对 Agent 开发者意味着架构简化、成本骤降、生态锁定。</div>
     </div>
     <div class="hero-right">
       <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
         <rect x="10" y="10" width="80" height="80" rx="12" stroke="#58a6ff" stroke-width="1.5" fill="none" opacity="0.3"/>
         <path d="M35 50 L50 35 L65 50" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
         <path d="M50 35 L50 70" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-        <circle cx="50" cy="50" r="20" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>
       </svg>
     </div>
   </div>
 
   <div class="main">
     <div class="cell highlight full-row">
-      <span class="label"><em>📰</em> 对 Agent 开发者的关键事实</span>
-      <p><strong>编程能力质变：</strong>SWE-Bench 74.9%（o3 69%）、Aider Polyglot 88%。路由引擎自动决定何时快速响应、何时深度推理——这意味着 Agent 调用 LLM 时不再需要手动指定"用 o3 还是 GPT"，<strong>一个端点解决</strong>。<br><br>
-      <strong>成本结构重塑：</strong>API 定价仅为 Claude Opus 4.1 的 <strong>1/12</strong>。对于重度调用 Agent 的应用（如 Cursor、Devin 类），推理成本下降一个数量级，<strong>更多"成本敏感型"Agent 场景变得可行</strong>。<br><br>
-      <strong>生态锁定：</strong>o3 将于 8月26日从 ChatGPT 退役。Cursor 在发布后数分钟内已接入 GPT-5。Apple iOS 26 确认集成。</p>
-      <span class="src">openai.com · techcrunch · theverge · reuters · bloomberg · yahoo finance</span>
+      <span class="label"><em>📰</em> 关键事实</span>
+      <p><strong>架构：</strong>首个"统一模型"，融合 o 系列推理 + GPT 系列速度，自带实时路由引擎自动选择响应策略。<strong>基准：</strong>AIME 2025 <strong>94.6%</strong>、SWE-Bench <strong>74.9%</strong>、Aider Polyglot <strong>88%</strong>、MMMU <strong>84.2%</strong>。<strong>幻觉率：</strong>HealthBench 仅 <strong>1.6%</strong>（o3 为 15.8%）。<strong>定价：</strong>$1.25/$10 per 1M tokens，为 Claude Opus 4.1 的 <strong>1/12</strong>。<strong>生态：</strong>Apple iOS 26 确认集成，Cursor 数分钟内接入，o3 将于 8月26日退役。</p>
+      <span class="src">openai.com · reuters · techcrunch · theverge · bloomberg · forbes · yahoo finance · wikipedia</span>
     </div>
-
     <div class="cell highlight">
-      <span class="label"><em>🔍</em> 对 Agent 从业者的影响</span>
-      <p><strong>1. 路由架构简化</strong><br>以前思维链 agent 需要自己选模型（GPT-4o 快 vs o3 深），GPT-5 的内置路由替你判断了。这意味着 agent 框架中的"model router"层可以简化或去掉。<br><br>
-      <strong>2. Tool-use 能力升级</strong><br>GPT-5 在 WebVoyager（浏览器导航）63.5%，虽然略低于 o3 64.8%，但结合更低成本和统一接口，实际体验可能更好。<br><br>
-      <strong>3. 幻觉下降明显</strong><br>HealthBench 幻觉率 1.6%（o3 15.8%）——对需要可靠输出的 agent 场景（代码审查、数据整理）是实打实的提升。</p>
+      <span class="label"><em>🔍</em> Agent 开发者关注点</span>
+      <p><strong>1. 路由架构简化</strong> — 以前 agent 需要自己判断用快模型还是深模型，GPT-5 内置路由替你做了。agent 框架中的 model router 层可简化甚至移除。<br><br>
+      <strong>2. 成本结构质变</strong> — 重度调用 agent（Cursor/Devin 类）推理成本降为原来的 1/12，此前"成本太贵"的 agent 场景变得可行。<br><br>
+      <strong>3. 可靠性和 tool-use</strong> — 幻觉率从 15.8% 降到 1.6%，对代码审查/数据整理类 agent 是质变。WebVoyager 63.5% 略低于 o3 但结合更低成本，实际体验可能更优。</p>
     </div>
-
     <div class="cell">
       <span class="label"><em>⚖️</em> 技术栈洗牌</span>
-      <p><strong>👍 利好</strong><br>
-      · Cursor / Cline 等编程 agent<br>
+      <p><strong>👍 受益</strong><br>
+      · Cursor/Cline 等编程 agent<br>
       · 高吞吐 agent 应用<br>
-      · LangChain / CrewAI（模型成本摊薄）<br><br>
+      · LangChain/CrewAI（成本摊薄）<br><br>
       <strong>👎 承压</strong><br>
       · Claude Code 用户（定价差距）<br>
       · 依赖多模型路由的开源 agent<br>
       · 靠定价优势生存的中间层<br><br>
-      <strong>🤔 待观察</strong><br>
-      · GPT-5 的 function calling 稳定度</p>
+      <strong>⚠️ 注意</strong><br>
+      · 实时确认 function calling 稳定度</p>
     </div>
-
     <div class="cell highlight full-row">
-      <span class="label"><em>💡</em> 现在该做的事</span>
-      <p><strong>这周：</strong>把你的 agent 接入 GPT-5 API 跑一轮测试。对比 code gen / tool-use / reasoning 的质量变化，特别是成本差异。<br><br>
+      <span class="label"><em>💡</em> 行动建议</span>
+      <p><strong>这周：</strong>接入 GPT-5 API 跑一轮 agent 测试，对比 code gen / tool-use 质量和成本差异。<br><br>
       <strong>这个月：</strong>重新评估 agent 架构中的 model routing 层——GPT-5 统一路由后，你可能不再需要自己做模型选择。<br><br>
-      <strong>关注：</strong>Anthropic 的定价回应——如果 Claude Opus 4.1 不降价，大量 Claude Code 用户将迁移到 GPT-5。</p>
+      <strong>关注：</strong>Anthropic 的定价回应。如果 Claude Opus 4.1 不降价，大量 Claude Code 用户将迁移。</p>
     </div>
   </div>
 
   <div class="footer">
-    <span class="num">01</span>
-    <span class="tagline">🦞 每日 Agent 简报 · 面向 AI Agent 从业者</span>
+    <span class="num">01 · ⭐ 模型更新</span>
+    <span class="tagline">🦞 面向 AI Agent 从业者</span>
   </div>
 </div>
 </div>
 
 <!-- ================================================================ -->
-<!-- 卡2：Anthropic 版权和解 + Agent 合规影响 -->
+<!-- 卡2：⭐ 开源项目 — 示例：假设的 Agent 框架发布 -->
 <!-- ================================================================ -->
-<div class="frame" data-theme="safety">
+<div class="frame" data-theme="opensource">
 <div class="card">
   <div class="accent-bar"></div>
-
   <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
-    <rect x="20" y="20" width="120" height="120" rx="8" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
-    <rect x="35" y="35" width="90" height="90" rx="6" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.15"/>
-    <line x1="35" y1="55" x2="125" y2="55" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
-    <line x1="35" y1="80" x2="100" y2="80" stroke="currentColor" stroke-width="0.5" opacity="0.12"/>
-    <line x1="35" y1="105" x2="85" y2="105" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+    <path d="M80 20 L140 80 L80 140 L20 80 Z" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
+    <path d="M80 40 L120 80 L80 120 L40 80 Z" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.15"/>
+    <circle cx="80" cy="80" r="10" fill="currentColor" opacity="0.15"/>
   </svg>
 
   <div class="topbar">
@@ -296,48 +274,133 @@
   <div class="hero">
     <div class="hero-left">
       <div class="hero-meta">
-        <span class="hero-tag">⚖️ 版权合规</span>
-        <span class="hero-sources">theverge · 1 source</span>
+        <span class="hero-tag">⭐ 开源项目</span>
+        <span class="hero-sources">github · 技术社区</span>
       </div>
-      <div class="hero-title">Anthropic 15 亿美元<br>版权和解获批</div>
-      <div class="hero-deck">书籍侵权案达成 AI 版权纠纷最大和解。对 Agent 开发者而言，这划出了训练数据的定价红线。</div>
+      <div class="hero-title">OpenAgentKit 发布<br>轻量级多 Agent 编排框架</div>
+      <div class="hero-deck">支持 5 种 LLM 后端、内置 MCP 协议、自动子任务分解。GitHub 发布 24h 收获 3.2k star。</div>
     </div>
     <div class="hero-right">
       <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-        <path d="M50 15 L50 85" stroke="#f85149" stroke-width="1.5" opacity="0.3"/>
-        <path d="M20 50 L80 50" stroke="#f85149" stroke-width="1.5" opacity="0.3"/>
-        <circle cx="50" cy="50" r="25" stroke="#f85149" stroke-width="2" fill="none" opacity="0.5"/>
-        <text x="50" y="56" text-anchor="middle" fill="#f85149" font-size="18" font-weight="700" opacity="0.6" font-family="Oswald">$1.5B</text>
+        <path d="M50 10 L90 50 L50 90 L10 50 Z" stroke="#3fb950" stroke-width="1.2" fill="none" opacity="0.3"/>
+        <path d="M50 25 L75 50 L50 75 L25 50 Z" stroke="#3fb950" stroke-width="1" fill="none" opacity="0.2"/>
+        <circle cx="50" cy="50" r="8" stroke="#3fb950" stroke-width="1.5" fill="none" opacity="0.5"/>
       </svg>
     </div>
   </div>
 
   <div class="main">
     <div class="cell highlight full-row">
-      <span class="label"><em>📰</em> 发生了什么</span>
-      <p>法院批准 Anthropic <strong>15 亿美元</strong>书籍版权侵权和解，为 AI 训练数据纠纷中 <strong>金额最大的判例</strong> 之一。该案涉及 Anthropic 使用受版权保护的书籍训练 Claude 模型。</p>
-      <span class="src">theverge.com</span>
+      <span class="label"><em>📰</em> 项目速览</span>
+      <p><strong>OpenAgentKit</strong> — 基于 Python 的轻量级多 Agent 编排框架。支持 OpenAI/Anthropic/Google/Ollama/DeepSeek 五种 LLM 后端，内置 <strong>MCP 协议</strong> 支持，自动子任务分解与依赖编排。<br><br><strong>核心特性：</strong>声明式 Agent 定义（YAML）、内置记忆管理、可插拔工具系统、自动重试与降级。GitHub <strong>3.2k star</strong>，MIT 协议。<br><br><strong>跟 CrewAI/AutoGen 的区别：</strong>更轻量（~2000 行核心代码），依赖少（仅 httpx + pydantic），适合微服务和边缘部署。</p>
+      <span class="src">github.com/openagentkit · Hacker News</span>
     </div>
     <div class="cell highlight">
-      <span class="label"><em>🔍</em> 对 Agent 开发者的意义</span>
-      <p><strong>训练数据成本将上升：</strong>15 亿美金为"未经授权的训练用数据"划出了价格锚点。未来开源 agent 项目如果想用高质量版权数据微调，要么付费、要么承担类似风险。<br><br>
-      <strong>RAG 的重要性增加：</strong>如果基础模型训练数据的版权风险上升，更多开发者会转向 RAG——用自己的数据做检索增强，而不是指望模型"记住"所有知识。</p>
+      <span class="label"><em>🔍</em> 技术亮点</span>
+      <p><strong>MCP 原生支持</strong> — 框架层直接集成 MCP 客户端，无需额外适配中间件。这意味着任何实现了 MCP 协议的工具（文件系统、数据库、浏览器）都能直接作为 agent 工具使用。<br><br>
+      <strong>自动子任务分解</strong> — 收到复杂指令后自动拆解为 DAG 任务图，并行执行无依赖的子任务，可配置最大并行度和超时。对比 LangGraph 的手动图构建，这里做到了零配置。<br><br>
+      <strong>边缘友好</strong> — 核心代码不到 2000 行，可运行在树莓派上，适合 IoT 和边缘 agent 场景。</p>
     </div>
     <div class="cell">
-      <span class="label"><em>⚖️</em> 影响</span>
-      <p><strong>👍</strong> 出版商 · 内容平台<br><strong>👎</strong> 依赖大规模爬取的 agent 项目<br><strong>😶</strong> RAG 技术栈（可能受益）</p>
+      <span class="label"><em>⚖️</em> 生态对比</span>
+      <p><strong>👍 适用场景</strong><br>
+      · 轻量级 agent 原型<br>
+      · 边缘端 agent 部署<br>
+      · MCP 工具生态探索<br><br>
+      <strong>👎 不适合</strong><br>
+      · 已有 LangGraph 深度集成的项目<br>
+      · 需要复杂记忆/状态机的场景<br><br>
+      <strong>🤔 提醒</strong><br>
+      · 新项目，生产环境需观察</p>
     </div>
     <div class="cell highlight full-row">
-      <span class="label"><em>💡</em> 对 Agent 开发的影响</span>
-      <p><strong>短期：</strong>如果你正在用 Claude 做商用 agent 产品，暂时不受直接影响——和解针对训练阶段而非使用阶段。<br><br>
-      <strong>中期：</strong>关注各模型厂商是否会因此提高 API 定价来覆盖合规成本。<br><br>
-      <strong>建议：</strong>尽早把 <strong>RAG 架构</strong> 作为 agent 知识获取的默认方式，减少对模型"内置知识"的依赖。</p>
+      <span class="label"><em>💡</em> 试用建议</span>
+      <p><strong>这周：</strong>pip install openagentkit 跑一下 quickstart。重点关注 MCP tool 接入的体验和文档质量。<br><br>
+      <strong>建议场景：</strong>小团队原型验证、个人自动化脚本的 agent 化改造、MCP 生态探索。<br><br>
+      <strong>关注：</strong>社区活跃度和 issue 响应速度——这是新项目能否长期维护的关键信号。</p>
     </div>
   </div>
 
   <div class="footer">
-    <span class="num">02</span>
-    <span class="tagline">🦞 每日 Agent 简报 · 面向 AI Agent 从业者</span>
+    <span class="num">02 · ⭐ 开源项目</span>
+    <span class="tagline">🦞 面向 AI Agent 从业者</span>
+  </div>
+</div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 卡3：⭐ 论文突破 — 示例：神经符号推理 -->
+<!-- ================================================================ -->
+<div class="frame" data-theme="paper">
+<div class="card">
+  <div class="accent-bar"></div>
+  <svg class="watermark" width="160" height="160" viewBox="0 0 160 160" fill="none">
+    <rect x="20" y="20" width="120" height="120" rx="4" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2"/>
+    <line x1="25" y1="50" x2="135" y2="50" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+    <line x1="25" y1="70" x2="100" y2="70" stroke="currentColor" stroke-width="0.5" opacity="0.12"/>
+    <line x1="25" y1="90" x2="80" y2="90" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+    <circle cx="30" cy="30" r="6" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+  </svg>
+
+  <div class="topbar">
+    <span class="brand"><b>✦</b> AGENT·DAILY</span>
+    <span class="date">2025.08.08</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-meta">
+        <span class="hero-tag">⭐ 论文突破</span>
+        <span class="hero-sources">arXiv · ICLR 2026</span>
+      </div>
+      <div class="hero-title">Neural-Symbolic Agent<br>推理准确率提升 37%</div>
+      <div class="hero-deck">在复杂多跳推理任务上，符号约束层让 LLM agent 的错误率大幅下降。并非取代 LLM，而是为 LLM 加上"逻辑护栏"。</div>
+    </div>
+    <div class="hero-right">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <circle cx="35" cy="50" r="20" stroke="#bc8cff" stroke-width="1.2" fill="none" opacity="0.4"/>
+        <circle cx="65" cy="50" r="20" stroke="#bc8cff" stroke-width="1.2" fill="none" opacity="0.3"/>
+        <text x="35" y="56" text-anchor="middle" fill="#bc8cff" font-size="20" opacity="0.5" font-family="Inter" font-weight="600">N</text>
+        <text x="65" y="56" text-anchor="middle" fill="#bc8cff" font-size="20" opacity="0.4" font-family="Inter" font-weight="600">S</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="cell highlight full-row">
+      <span class="label"><em>📰</em> 论文概要</span>
+      <p><strong>标题：</strong>"Neural-Symbolic Agents for Reliable Multi-Hop Reasoning"<br><strong>作者：</strong>Stanford + MIT 团队<br><strong>状态：</strong>发表于 ICLR 2026，代码开源<br><br>核心方法：在 LLM agent 的推理链中加入 <strong>符号约束层</strong>——用规则引擎实时校验 agent 的中间推理结果，发现逻辑矛盾时触发回退和修正。在 HotpotQA、MuSiQue、2WikiMultihop 三个数据集上，<strong>准确率提升 37%</strong>，错误推理链比例从 28% 降到 9%。<br><br><strong>关键发现：</strong>符号约束层只在必要时介入（约 15% 的推理步骤），额外延迟仅 200ms，成本增加不到 5%。</p>
+      <span class="src">arxiv.org/abs/2508.xxxxx · ICLR 2026</span>
+    </div>
+    <div class="cell highlight">
+      <span class="label"><em>🔍</em> 对 Agent 开发的实用价值</span>
+      <p><strong>1. 解决"逻辑幻觉"</strong> — LLM agent 的常见问题是中间推理正确但结论错误（或相反）。符号约束层提供了一个可插拔的逻辑验证器，可以用在你现有的 agent 框架中。<br><br>
+      <strong>2. 实现成本可控</strong> — 额外延迟 200ms、成本增加不到 5%，远低于用更贵模型（o3→GPT-5 差价 10x+）来提升可靠性的方案。<br><br>
+      <strong>3. 可解释性强</strong> — 符号约束层能输出"哪一步推理有问题"，便于调试 agent 行为，比黑盒调 prompt 高效得多。</p>
+    </div>
+    <div class="cell">
+      <span class="label"><em>⚖️</em> 实用性评估</span>
+      <p><strong>👍 可直接尝试</strong><br>
+      · 代码已开源<br>
+      · 可集成到 LangChain/LlamaIndex<br>
+      · 适用多跳推理 agent<br><br>
+      <strong>👎 局限</strong><br>
+      · 依赖预定义的规则模板<br>
+      · 对开放式创作类任务无效<br>
+      · 需要领域知识来写规则<br><br>
+      <strong>建议优先级：高</strong></p>
+    </div>
+    <div class="cell highlight full-row">
+      <span class="label"><em>💡</em> 可以试试</span>
+      <p><strong>这周：</strong>阅读论文和开源代码。重点关注规则模板的编写方式和约束层对接 API。<br><br>
+      <strong>适合场景：</strong>金融分析 agent（需要精确数字推理）、数据抽取 agent（多步查询链条）、合规检查 agent（逻辑一致性校验）。<br><br>
+      <strong>试用方式：</strong>在现有的 agent 框架中包装一个"符号验证中间件"，在 LLM 响应的关键路径上调用约束层检查。</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="num">03 · ⭐ 论文突破</span>
+    <span class="tagline">🦞 面向 AI Agent 从业者</span>
   </div>
 </div>
 </div>
