@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🦞 每日 AI 简报 · 参考卡片</title>
+<title>🦞 每日 AI 简报 · 2025.08.08</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Oswald:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: #0d0d0f;
     display: flex;
@@ -18,15 +17,12 @@
     align-items: center;
     min-height: 100vh;
   }
-
-  /* =============== 3:4 固定画布 =============== */
   .frame {
     width: 1500px;
     height: 2000px;
     flex-shrink: 0;
     box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
-
   .card {
     width: 100%;
     height: 100%;
@@ -40,8 +36,6 @@
     position: relative;
     overflow: hidden;
   }
-
-  /* 科技感网格背景 */
   .card::before {
     content: '';
     position: absolute;
@@ -53,8 +47,6 @@
       linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
     background-size: 40px 40px;
   }
-
-  /* 顶部光晕 */
   .card::after {
     content: '';
     position: absolute;
@@ -65,12 +57,10 @@
     background: radial-gradient(ellipse at 30% 40%, var(--glow) 0%, transparent 70%);
     pointer-events: none;
   }
-
   .frame[data-theme="model"]   { --stripe: #58a6ff; --glow: rgba(88,166,255,0.08); }
   .frame[data-theme="safety"]  { --stripe: #f85149; --glow: rgba(248,81,73,0.08); }
   .frame[data-theme="science"] { --stripe: #bc8cff; --glow: rgba(188,140,255,0.08); }
 
-  /* ============= 顶部栏 ============= */
   .topbar {
     display: flex;
     justify-content: space-between;
@@ -94,7 +84,6 @@
     color: rgba(255,255,255,0.3);
   }
 
-  /* ============= 标题区 ============= */
   .hero {
     position: relative; z-index: 1;
   }
@@ -136,7 +125,6 @@
     max-width: 1200px;
   }
 
-  /* ============= 主体 — 用 flex:1 撑满 ============= */
   .main {
     flex: 1;
     position: relative; z-index: 1;
@@ -146,11 +134,9 @@
     gap: 16px;
     align-content: stretch;
   }
-
-  /* 全宽行（信息）单独处理 */
-  .full-row {
-    grid-column: 1 / -1;
-  }
+  .full-row { grid-column: 1 / -1; }
+  .half-left { grid-column: 1 / 2; }
+  .half-right { grid-column: 2 / 3; }
 
   .cell {
     padding: 24px 28px;
@@ -169,7 +155,6 @@
     border-left: 4px solid var(--stripe);
     background: rgba(255,255,255,0.04);
   }
-
   .cell .label {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
@@ -191,7 +176,6 @@
     margin-top: auto;
   }
 
-  /* ============= 底部 ============= */
   .footer {
     display: flex;
     justify-content: space-between;
@@ -215,7 +199,7 @@
 <body>
 
 <!-- ================================================================ -->
-<!-- 卡1：GPT-5 发布 -->
+<!-- 卡 1：GPT-5 发布 -->
 <!-- ================================================================ -->
 <div class="frame" data-theme="model">
 <div class="card">
@@ -227,29 +211,29 @@
   <div class="hero">
     <div class="hero-meta">
       <span class="hero-tag">🔥 今日头条</span>
-      <span class="hero-sources">融合 · 6 sources</span>
+      <span class="hero-sources">融合分析 · 6 sources</span>
     </div>
-    <div class="hero-title">GPT-5 正式发布<br>定价低到可能触发价格战</div>
-    <div class="hero-deck">OpenAI 今天上线 GPT-5，API 定价仅 $1.25/1M tokens，远低于 Anthropic Claude Opus 4.1 的 $15。Apple 确认 iOS 26 集成。ChatGPT 周活 7 亿。</div>
+    <div class="hero-title">GPT-5 发布<br>定价击穿地板</div>
+    <div class="hero-deck">$1.25/1M tokens — 仅为 Claude Opus 4.1 的 1/12。统一架构+实时路由，SWE-Bench 75%。Apple iOS 26 将集成。</div>
   </div>
 
   <div class="main">
     <div class="cell full full-row">
       <span class="label"><em>📰</em> 信息</span>
-      <p>统一系统架构 + 实时路由引擎，自动在轻量模型和深度推理间切换。SWE-Bench 准确率 <strong>75%</strong>（o3 为 69%）。<strong>$1.25/1M input</strong>、<strong>$10/1M output</strong>，仅为 Anthropic $15/$75 的 <strong>1/12</strong>。</p>
-      <span class="src">来源：computerweekly · bloomberg · forbes · theverge · yahoo finance</span>
+      <p>OpenAI 今日发布 <strong>GPT-5</strong>，采用统一系统 + 实时路由引擎，自动在轻量推理和深度推理间切换。<strong>API 定价：</strong>$1.25/1M input、$10/1M output（Claude Opus 4.1 为 $15/$75）。<strong>基准：</strong>SWE-Bench 75%、coding 能力大幅领先前代。o3 模型在国际象棋赛全胜夺冠。<strong>合作：</strong>Apple 确认 iOS 26 集成 GPT-5。ChatGPT 周活达 <strong>7 亿</strong>。</p>
+      <span class="src">computerweekly · bloomberg · forbes · theverge · bbc · yahoo finance</span>
     </div>
-    <div class="cell highlight">
+    <div class="cell highlight half-left">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>算力投入天文数字（Oracle 300亿/年、Meta 720亿、Google 850亿），但模型定价反向下杀。不是慈善——是<strong>用规模逼死对手</strong>。一旦 GPT-5 成为默认选项，后发者很难翻身。</p>
+      <p>定价策略激进到近乎"倾销"。OpenAI 每年基础设施支出超 300 亿美元，但模型定价反向下杀——这不是让利，是<strong>用资本优势清场</strong>。一旦 GPT-5+路由方案成为开发者默认选项，后发者几乎不可能翻盘。</p>
     </div>
-    <div class="cell">
+    <div class="cell half-right">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 开发者 · AI 应用公司<br><strong>👎</strong> Anthropic · Google<br><strong>😶</strong> Apple（iOS 26 前观望）</p>
+      <p><strong>👍</strong> 开发者 · AI 应用公司<br><strong>👎</strong> Anthropic · Google 等竞品<br><strong>😶</strong> Apple（iOS 26 前）· 开源社区</p>
     </div>
     <div class="cell full full-row">
       <span class="label"><em>💡</em> 启示</span>
-      <p><strong>LLM 价格战正式开打</strong>。应用层迎来短暂成本红利期，模型层进入洗牌期。关注 Anthropic 和 Google 如何回应——可能决定未来 6 个月的格局。</p>
+      <p><strong>LLM 价格战正式开打。</strong> 应用层将经历短暂成本红利，但长期看平台锁定风险加大。竞品面临两难：跟进降价→利润崩溃；不跟进→失去市场。<strong>关键信号：</strong>Anthropic 和 Google 在 2 周内的定价回应。</p>
     </div>
   </div>
 
@@ -261,7 +245,7 @@
 </div>
 
 <!-- ================================================================ -->
-<!-- 卡2：GPT-5 首日口碑 -->
+<!-- 卡 2：GPT-5 首日口碑 -->
 <!-- ================================================================ -->
 <div class="frame" data-theme="model">
 <div class="card">
@@ -272,30 +256,30 @@
 
   <div class="hero">
     <div class="hero-meta">
-      <span class="hero-tag">📊 用户口碑</span>
-      <span class="hero-sources">融合 · 4 sources</span>
+      <span class="hero-tag">📊 首日反馈</span>
+      <span class="hero-sources">融合分析 · 4 sources</span>
     </div>
-    <div class="hero-title">GPT-5 首日<br>好评与翻车并存</div>
-    <div class="hero-deck">开发者喜欢定价和编程能力，但被发现拼写和地理常识翻车。Altman 回应"yes man"争议。</div>
+    <div class="hero-title">好评与翻车<br>价格压倒一切</div>
+    <div class="hero-deck">开发者盛赞定价和编程能力，但 spelling 翻车。Bloomberg 评价"mixed"。Altman 回应"yes man"争议。</div>
   </div>
 
   <div class="main">
     <div class="cell full full-row">
       <span class="label"><em>📰</em> 信息</span>
-      <p>Bloomberg 评价 <strong>"mixed"</strong>。Guardian 实测发现它分不清 blueberry 有几个 B。但 Simon Willison 等开发者称编程能力出色。Altman 在播客透露，关闭"yes man"风格后有用户请求恢复——"从未有人如此支持过我"。</p>
+      <p>Bloomberg 首日报道评价 <strong>"mixed"</strong>。Guardian 实测发现 GPT-5 认为 blueberry 有三个 B，记不清 Northern Territory 的 R 数。但开发者 Simon Willison 等称编程能力"出色"，定价"aggressively competitive"。Altman 在播客中透露：去掉"yes man"风格后，有用户请求恢复——"我从未有过如此支持我的人"。</p>
       <span class="src">bloomberg · theguardian · businessinsider · yahoo finance</span>
     </div>
-    <div class="cell highlight">
+    <div class="cell highlight half-left">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>LLM 的常识缺陷是系统性问题。关键是：<strong>定价带来的好评压过了缺陷的声音</strong>。市场对"够好且便宜"的容忍度远高于"完美但贵"——这对竞品是坏消息。</p>
+      <p>定价带来的正面反馈 <strong>明显压过了</strong> 能力缺陷的批评。市场传递了一个清晰信号："够好且便宜"比"完美但贵"更容易赢。这对竞品是危险的——即使产品更好，如果定价贵 10 倍，用户可能不在乎。</p>
     </div>
-    <div class="cell">
+    <div class="cell half-right">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> 价格敏感用户 · 开发者<br><strong>👎</strong> 追求完美的用户 · 竞品<br><strong>😶</strong> 普通消费者（被"PhD 级"营销拉高期待）</p>
+      <p><strong>👍</strong> 价格敏感开发者<br><strong>👎</strong> 竞品（被迫降价）<br><strong>😶</strong> 普通消费者（被"PhD 级"营销拉高期待）</p>
     </div>
     <div class="cell full full-row">
       <span class="label"><em>💡</em> 启示</span>
-      <p>AI 产品时代，<strong>定价策略比基准分数更重要</strong>。OpenAI 押注"规模换市场"首日奏效。关注首周留存和开发者迁移数据——那才是真实判决。</p>
+      <p>对 AI 产品：<strong>定价策略比基准分数更重要。</strong> OpenAI 的"规模换市场"首日奏效。关注 <strong>2 周内开发者迁移数据</strong>——从 API 调用量变化可以判断这一定价策略的真实杀伤力。</p>
     </div>
   </div>
 
@@ -307,7 +291,7 @@
 </div>
 
 <!-- ================================================================ -->
-<!-- 卡3：AI 象棋赛 + NASA -->
+<!-- 卡 3：今日其他动态（NASA + 象棋赛 + Anthropic 和解） -->
 <!-- ================================================================ -->
 <div class="frame" data-theme="science">
 <div class="card">
@@ -318,30 +302,30 @@
 
   <div class="hero">
     <div class="hero-meta">
-      <span class="hero-tag">♟️ + 🚀 跨界</span>
-      <span class="hero-sources">融合 · 2 sources</span>
+      <span class="hero-tag">🌐 今日速览</span>
+      <span class="hero-sources">融合分析 · 3 sources</span>
     </div>
-    <div class="hero-title">OpenAI 赢象棋赛<br>NASA 联手 Google 做 AI 医生</div>
-    <div class="hero-deck">o3 击败 Grok 4 全胜夺冠。NASA×Google 的 AI 医疗助手准确率最高 88%。</div>
+    <div class="hero-title">NASA×Google AI 医生<br>Anthropic 15 亿和解</div>
+    <div class="hero-deck">AI 象棋赛 o3 夺冠。NASA 医疗助手最高准确率 88%。Anthropic 版权案 15 亿美元和解获批。</div>
   </div>
 
   <div class="main">
     <div class="cell full full-row">
       <span class="label"><em>📰</em> 信息</span>
-      <p><strong>AI 象棋赛</strong>：Kaggle 8 模型锦标赛，o3 全胜夺冠。Grok 4 半程领先，决赛连续丢后崩盘。Gemini 第三。<br><br><strong>NASA×Google</strong>：CMO-DA 医疗助手，运行在 Google Vertex AI。脚踝伤 <strong>88%</strong>、耳痛 <strong>80%</strong>、腹痛 <strong>74%</strong> 准确率。</p>
-      <span class="src">bbc.com · techcrunch.com</span>
+      <p><strong>AI 象棋赛：</strong>Kaggle 锦标赛，o3 全胜击败 Grok 4 夺冠（Grok 决赛连续丢后崩盘）。Gemini 第三。<br><br><strong>NASA×Google：</strong>CMO-DA 医疗助手，脚踝伤诊断 <strong>88%</strong> 准确率。采用 Google Vertex AI + 多模态评估。<br><br><strong>Anthropic 和解：</strong>书籍侵权案 <strong>15 亿美元</strong> 和解获法院批准，为 AI 版权纠纷最大判例之一。</p>
+      <span class="src">bbc.com · techcrunch.com · theverge</span>
     </div>
-    <div class="cell highlight">
+    <div class="cell highlight half-left">
       <span class="label"><em>🔍</em> 洞察</span>
-      <p>象棋赛证明通用模型的推理能力逼近专项冠军——<strong>通用即专项</strong>的趋势在加速。NASA AI 医生更值得关注：边缘计算+多模态诊断的架构，可能回流到地球医疗场景。</p>
+      <p>象棋赛证明：通用模型推理能力逼近专项冠军，<strong>"通用即专项"趋势加速</strong>。NASA AI 医生的边缘计算+多模态架构值得关注——可能回流地球医疗场景。Anthropic 15 亿和解为 AI 版权纠纷画出了<strong>第一条价格线</strong>。</p>
     </div>
-    <div class="cell">
+    <div class="cell half-right">
       <span class="label"><em>⚖️</em> 利益</span>
-      <p><strong>👍</strong> OpenAI · Google Cloud<br><strong>👎</strong> xAI（Grok 稳定性存疑）<br><strong>😶</strong> 传统远程医疗</p>
+      <p><strong>👍</strong> OpenAI · Google Cloud · 出版商<br><strong>👎</strong> xAI（稳定性存疑）<br><strong>😶</strong> 传统远程医疗·版权方</p>
     </div>
     <div class="cell full full-row">
       <span class="label"><em>💡</em> 启示</span>
-      <p>AI 竞赛从"谁更强"转向<strong>"谁更可靠"</strong>。Grok 输在稳定性而非能力上限——对所有 agent 产品是警示。NASA 的 AI 医生可能改写远程医疗成本结构。</p>
+      <p>AI 竞赛从"谁更强"转向<strong>"谁更可靠"</strong>——Grok 输在稳定性而非上限。Anthropic 15 亿和解金将成为训练数据版权的<strong>定价标杆</strong>，后续类似纠纷均会参考此数字。</p>
     </div>
   </div>
 
